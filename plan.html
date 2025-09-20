@@ -7,61 +7,71 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-100">
 
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-start text-center sm:text-left">
-            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-24 w-auto mb-4 sm:mb-0 sm:mr-8">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex flex-col sm:flex-row items-center text-center sm:text-left">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-20 w-auto mb-4 sm:mb-0 sm:mr-6">
             <div>
-                <h1 class="text-3xl lg:text-4xl font-bold text-teal-700">TPFP TMI : Transition Numérique</h1>
-                <p class="mt-2 text-gray-600">Plan de formation pour comprendre et maîtriser les outils du monde professionnel (10/2025)</p>
+                <h1 class="text-3xl font-bold text-gray-800">TPFP TMI : Transition Numérique (10/2025)</h1>
+                <p class="text-md text-gray-500">Plan de formation interactif</p>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto p-4 md:p-8">
-        <div class="space-y-8">
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Objectifs de la Formation</h2>
+            <p class="text-gray-700">À l'issue de cette journée, vous serez capable de comprendre les enjeux du numérique, de sécuriser vos données et d'utiliser les outils informatiques adaptés au monde professionnel avec plus d'aisance et d'efficacité.</p>
+        </div>
+
+        <div class="space-y-6">
+            <h2 class="text-2xl font-bold text-gray-800">Parcours de Formation</h2>
+            
             <!-- Module 1 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-teal-500">
-                <h2 class="text-2xl font-bold text-teal-800">Module 1 : Les Enjeux du Numérique</h2>
-                <p class="text-gray-600 mt-2">Définir la dématérialisation, citer les avantages de la saisie en ligne et comprendre l'impact sur les processus de travail.</p>
-                <div class="mt-4">
-                    <a href="module1.html" class="inline-block bg-teal-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-teal-700 transition-colors">
-                        Lancer le Module 1
-                    </a>
+            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-teal-700">Module 1 : Les Enjeux du Numérique</h3>
+                    <p class="text-gray-600 mt-1">Dématérialisation, saisie en ligne et impacts sur les processus de travail.</p>
                 </div>
+                <a href="module1.html" class="mt-4 sm:mt-0 w-full sm:w-auto text-center bg-teal-600 text-white px-5 py-2 rounded-lg shadow hover:bg-teal-700 transition duration-300">
+                    Lancer le module
+                </a>
             </div>
 
             <!-- Module 2 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-blue-500">
-                <h2 class="text-2xl font-bold text-blue-800">Module 2 : Sécurisation des Données</h2>
-                <p class="text-gray-600 mt-2">Comprendre le cryptage, l'utilité d'un gestionnaire de mot de passe et les enjeux du stockage sur le cloud.</p>
-                 <div class="mt-4">
-                    <a href="module2.html" class="inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
-                        Lancer le Module 2
-                    </a>
+            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-blue-800">Module 2 : Sécurisation des Données</h3>
+                    <p class="text-gray-600 mt-1">Mots de passe, cryptage, cloud et comment déjouer les pièges du phishing.</p>
                 </div>
+                <a href="module2.html" class="mt-4 sm:mt-0 w-full sm:w-auto text-center bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition duration-300">
+                    Lancer le module
+                </a>
             </div>
 
-            <!-- Module 3 (Placeholder) -->
-            <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-gray-400 opacity-60">
-                <h2 class="text-2xl font-bold text-gray-700">Module 3 : Les Outils Numériques Adaptés</h2>
-                <p class="text-gray-500 mt-2">Navigation Internet, Windows, Word, et les outils de visioconférence.</p>
-                <div class="mt-4">
-                     <button class="inline-block bg-gray-400 text-white font-semibold px-6 py-2 rounded-lg cursor-not-allowed">
-                        Bientôt disponible
-                    </button>
+            <!-- Module 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-purple-800">Module 3 : Les Outils Numériques Adaptés</h3>
+                    <p class="text-gray-600 mt-1">Maîtriser son environnement : Windows, Word, Internet et la Visioconférence.</p>
                 </div>
+                <a href="module3.html" class="mt-4 sm:mt-0 w-full sm:w-auto text-center bg-purple-600 text-white px-5 py-2 rounded-lg shadow hover:bg-purple-700 transition duration-300">
+                    Lancer le module
+                </a>
             </div>
         </div>
     </main>
 
     <footer class="text-center py-6 text-gray-500 text-sm">
-        <p>UIMM Pôle Formation - Centre-Val de Loire</p>
+        <p>Formation conçue pour la CCI Montargis</p>
     </footer>
 
 </body>
 </html>
+

@@ -1,4 +1,4 @@
 # Formation-AFPI
 
 # Cours-IA
-[Art du Prompt](https://sjaubert.github.io/Cours-IA/art_prompt.html?target=_blank)
+[Art du Prompt](https://sjaubert.github.io/Formation-AFPI/plan-Transition_numerique.html?target=_blank)

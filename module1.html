@@ -27,8 +27,6 @@
         .draggable { cursor: grab; }
         .drop-zone { border-style: dashed; }
         .drop-zone.drag-over { background-color: #e0f2f1; border-color: #14b8a6; }
-        .quiz-btn { transition: all 0.2s; }
-        .quiz-feedback { display: none; }
     </style>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -46,14 +44,12 @@
     </header>
 
     <main id="slideshow-container" class="flex-grow container mx-auto p-4 md:p-8 flex flex-col items-center justify-center">
-        <!-- Slide 1: Titre -->
+        <!-- Contenu des slides du module 1 (inchangé) -->
         <section class="slide active w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
             <h2 class="text-4xl font-bold text-teal-800 mb-4">Bienvenue dans le Module 1</h2>
             <p class="text-xl text-gray-600">Découvrons ensemble comment la transition numérique redessine notre quotidien professionnel.</p>
             <p class="mt-8 text-gray-500">Utilisez les flèches pour naviguer.</p>
         </section>
-
-        <!-- Slide 2: Définir la dématérialisation -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-6">1. Définir la <span class="text-teal-600">Dématérialisation</span></h2>
             <p class="text-lg text-gray-700 mb-4">C'est le remplacement de supports d'information matériels (souvent le papier) par des fichiers et processus numériques.</p>
@@ -73,8 +69,6 @@
                 <p class="font-semibold text-blue-800 text-center">Analogie : C'est comme la différence entre prendre en photo une lettre manuscrite et envoyer directement un e-mail.</p>
             </div>
         </section>
-
-        <!-- Slide 3: Avantages de la saisie en ligne -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-6">2. Les 2 Avantages Clés de la <span class="text-teal-600">Saisie en Ligne</span></h2>
             <p class="text-lg text-gray-600 mb-6">Quand on saisit une information une seule fois, directement dans le bon outil, on débloque d'énormes gains :</p>
@@ -91,8 +85,6 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Slide 4: Comprendre l'impact sur les processus -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-6">3. L'Impact sur les <span class="text-teal-600">Processus de Travail</span></h2>
             <p class="text-lg text-gray-600 mb-6">Le numérique ne fait pas qu'accélérer les anciennes méthodes. Il les <span class="font-semibold">transforme en profondeur</span>.</p>
@@ -111,8 +103,6 @@
             </div>
             <p class="mt-8 text-center text-lg font-semibold">On passe d'une course de relais à un travail d'équipe synchronisé !</p>
         </section>
-
-        <!-- Slide 5: Activité Drag & Drop -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-2">Activité : Le traitement d'une note de frais</h2>
             <p class="text-gray-600 mb-6">Mettons en pratique ! Faites glisser chaque étape dans la bonne colonne pour visualiser la transformation du processus.</p>
@@ -133,8 +123,6 @@
                 <div class="draggable bg-white p-2 border rounded-md shadow-sm" draggable="true" data-target="after">Remboursement automatique</div>
             </div>
         </section>
-        
-        <!-- Slide 6: Activité Brainstorming -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-2">Activité : Et vous, dans votre quotidien ?</h2>
             <p class="text-gray-600 mb-6">Maintenant que nous avons vu les concepts, quels processus de votre travail pourraient être améliorés par le numérique ?</p>
@@ -145,14 +133,11 @@
             <div id="post-it-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 min-h-[150px] bg-gray-50 p-4 rounded-md">
             </div>
         </section>
-
-        <!-- Slide 7: Conclusion -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
             <h2 class="text-3xl font-bold text-teal-800 mb-6">Ce qu'il faut retenir</h2>
             <p class="text-xl text-gray-700 mb-4">La transition numérique est une opportunité de <span class="font-semibold text-teal-600">repenser</span> nos manières de travailler pour les rendre plus <span class="font-semibold text-teal-600">simples</span>, plus <span class="font-semibold text-teal-600">rapides</span> et plus <span class="font-semibold text-teal-600">intelligentes</span>.</p>
             <p class="mt-8 text-2xl">Bravo pour ce premier module !</p>
         </section>
-
     </main>
 
     <footer class="container mx-auto px-6 py-4">
@@ -180,7 +165,6 @@
 
         function updateControls() {
             prevBtn.disabled = currentSlide === 0;
-            nextBtn.disabled = currentSlide === slides.length - 1;
             if (currentSlide === slides.length - 1) {
                 nextBtn.textContent = 'Terminer';
             } else {
@@ -198,53 +182,39 @@
         nextBtn.addEventListener('click', () => {
             if (currentSlide < slides.length - 1) {
                 showSlide(currentSlide + 1);
+            } else {
+                // MODIFICATION : Redirection vers le plan
+                window.location.href = 'plan.html';
             }
         });
 
-        // Brainstorming activity
+        // ... le reste du JS pour les activités est inchangé ...
         function addPostIt() {
             const input = document.getElementById('brainstorm-input');
             const board = document.getElementById('post-it-board');
             if (input.value.trim() === '') return;
-
             const postIt = document.createElement('div');
             postIt.className = 'post-it p-2 text-sm break-words';
             postIt.textContent = input.value;
             board.appendChild(postIt);
             input.value = '';
         }
-        document.getElementById('brainstorm-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                addPostIt();
-            }
-        });
-
-        // Drag & Drop activity
+        document.getElementById('brainstorm-input').addEventListener('keypress', function (e) { if (e.key === 'Enter') { addPostIt(); } });
         const draggables = document.querySelectorAll('.draggable');
         const dropZones = document.querySelectorAll('.drop-zone');
         let draggedItem = null;
-
         draggables.forEach(draggable => {
             draggable.addEventListener('dragstart', (e) => {
                 draggedItem = e.target;
                 setTimeout(() => e.target.style.display = 'none', 0);
             });
             draggable.addEventListener('dragend', (e) => {
-                setTimeout(() => {
-                    e.target.style.display = 'block';
-                    draggedItem = null;
-                }, 0);
+                setTimeout(() => { e.target.style.display = 'block'; draggedItem = null; }, 0);
             });
         });
-
         dropZones.forEach(zone => {
-            zone.addEventListener('dragover', e => {
-                e.preventDefault();
-                zone.classList.add('drag-over');
-            });
-            zone.addEventListener('dragleave', () => {
-                zone.classList.remove('drag-over');
-            });
+            zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+            zone.addEventListener('dragleave', () => { zone.classList.remove('drag-over'); });
             zone.addEventListener('drop', e => {
                 e.preventDefault();
                 zone.classList.remove('drag-over');
@@ -255,18 +225,12 @@
                         draggedItem.classList.add('bg-green-100', 'border-green-400');
                     } else {
                          draggedItem.classList.add('bg-red-100', 'border-red-400');
-                         setTimeout(() => {
-                            draggedItem.classList.remove('bg-red-100', 'border-red-400');
-                         }, 1000);
+                         setTimeout(() => { draggedItem.classList.remove('bg-red-100', 'border-red-400');}, 1000);
                     }
                 }
             });
         });
-
-        // Initialize first slide
         showSlide(0);
     </script>
-
 </body>
 </html>
-

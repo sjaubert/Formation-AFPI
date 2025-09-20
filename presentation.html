@@ -92,10 +92,16 @@
 <body class="text-gray-800">
 
     <div class="container mx-auto px-4 py-8">
-        <header class="text-center mb-8">
-            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-20 w-auto mb-4 sm:mb-0 sm:mr-6">
-            <h1 class="text-4xl md:text-5xl font-bold text-teal-700">La Transformation Numérique en Entreprise</h1>
-            <p class="text-lg text-gray-600 mt-2">Comprendre la dématérialisation, ses impacts et les enjeux de cybersécurité.</p>
+        <header class="text-center mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Emplacement pour le logo -->
+            <div class="flex-shrink-0">
+                <!-- Remplacer src par "logo_uimm_placeholder.jpg" pour utiliser votre image -->
+                <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Formation" class="h-12 md:h-16">
+            </div>
+            <div class="text-center md:text-right">
+                <h1 class="text-4xl md:text-5xl font-bold text-teal-700">La Transformation Numérique</h1>
+                <p class="text-lg text-gray-600 mt-2">Enjeux, processus et cybersécurité pour l'entreprise.</p>
+            </div>
         </header>
 
         <nav class="bg-white rounded-lg shadow-md mb-8 sticky top-2 z-10">
@@ -168,6 +174,28 @@
                     <h3 class="text-xl font-bold text-teal-700 mt-8 mb-4">Avantages de la saisie en ligne</h3>
                     <div class="chart-container h-96">
                         <canvas id="advantagesChart"></canvas>
+                    </div>
+
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Analyse détaillée des avantages</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-teal-50 p-6 rounded-lg border border-teal-200">
+                                <h4 class="font-bold text-lg text-teal-800 mb-2">🚀 Efficacité et Rapidité</h4>
+                                <p class="text-gray-700">Le traitement immédiat des documents numériques élimine les délais postaux et de manipulation. L'automatisation des workflows, comme la validation de factures, réduit drastiquement les erreurs de saisie manuelle et accélère les circuits de décision.</p>
+                            </div>
+                            <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                                <h4 class="font-bold text-lg text-sky-800 mb-2">💰 Économies Substantielles</h4>
+                                <p class="text-gray-700">La réduction des coûts peut atteindre <span class="font-bold">60%</span> en éliminant les dépenses liées au papier, à l'impression, à l'affranchissement et au stockage physique. Le temps gagné par les collaborateurs se traduit également par un gain financier direct.</p>
+                            </div>
+                            <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-200">
+                                <h4 class="font-bold text-lg text-indigo-800 mb-2">🌐 Accès Universel et Sécurisé</h4>
+                                <p class="text-gray-700">Les documents sont disponibles 24h/24 et 7j/7 depuis n'importe quel appareil connecté (ordinateur, tablette, smartphone). La gestion fine des droits d'accès permet de contrôler qui peut consulter ou modifier une information, renforçant la sécurité.</p>
+                            </div>
+                             <div class="bg-amber-50 p-6 rounded-lg border border-amber-200">
+                                <h4 class="font-bold text-lg text-amber-800 mb-2">🤝 Collaboration Améliorée</h4>
+                                <p class="text-gray-700">Plusieurs collaborateurs peuvent consulter ou travailler sur un même dossier en temps réel. Le suivi des versions et des modifications est transparent, ce qui améliore la coordination et la réactivité des équipes, notamment en télétravail.</p>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="mt-12">

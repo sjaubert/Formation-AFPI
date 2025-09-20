@@ -18,11 +18,9 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        #password-strength-bar {
-            transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
-        }
-        .quiz-btn { transition: all 0.2s; }
-        .quiz-feedback { display: none; }
+        .quiz-option { transition: background-color 0.2s; }
+        #phishing-modal { transition: opacity 0.3s; }
+        .email-item { cursor: pointer; }
     </style>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -32,128 +30,88 @@
             <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-16 w-auto mr-6">
             <div>
                 <h1 class="text-2xl font-bold text-blue-800">Module 2 : Sécurisation des Données</h1>
-                <p class="text-sm text-gray-500">Protégez vos informations et celles de l'entreprise.</p>
+                <p class="text-sm text-gray-500">Déjouez les pièges et protégez les informations.</p>
             </div>
         </div>
     </header>
 
     <main id="slideshow-container" class="flex-grow container mx-auto p-4 md:p-8 flex flex-col items-center justify-center">
-        <!-- Slide 1: Titre -->
+        <!-- Slides de contenu -->
         <section class="slide active w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
-            <h2 class="text-4xl font-bold text-blue-800 mb-4">La sécurité numérique, c'est l'affaire de tous !</h2>
-            <p class="text-xl text-gray-600">Apprenons ensemble les bons réflexes pour protéger nos données les plus précieuses.</p>
-            <p class="text-center text-5xl mt-8">🔐</p>
+            <h2 class="text-4xl font-bold text-blue-800 mb-4">La sécurité numérique, une chaîne aussi solide que son maillon le plus faible.</h2>
+            <p class="text-xl text-gray-600">Ce maillon, c'est vous. Apprenons à le renforcer.</p>
         </section>
 
-        <!-- Slide 2: Mot de passe -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-blue-800 mb-4">1. Le Gardien de votre vie numérique : <span class="text-blue-600">le Mot de Passe</span></h2>
-            <p class="text-gray-700 mb-6">Un bon mot de passe, c'est comme la porte blindée de votre maison. Testez la solidité de votre porte :</p>
-            <div>
-                <label for="password-input" class="font-semibold">Testez un mot de passe :</label>
-                <input type="text" id="password-input" class="w-full p-2 border rounded-md mt-2" placeholder="Tapez ici pour voir la jauge...">
-                <div class="w-full bg-gray-200 rounded-full h-4 mt-3">
-                    <div id="password-strength-bar" class="h-4 rounded-full" style="width: 0%"></div>
-                </div>
-                <p id="password-feedback" class="text-sm mt-2 text-center font-semibold">&nbsp;</p>
-            </div>
-             <p class="mt-4 text-sm text-gray-600 p-3 bg-gray-50 rounded-lg">Un mot de passe robuste contient : <span class="font-semibold">+12 caractères, Majuscules, minuscules, chiffres et symboles.</span></p>
+            <h2 class="text-3xl font-bold text-blue-800 mb-4">1. Le Phishing (ou Hameçonnage)</h2>
+            <p class="text-lg text-gray-700 mb-4">C'est une technique de fraude où un pirate se fait passer pour une entité de confiance (banque, direction, etc.) pour vous soutirer des informations personnelles.</p>
+            <p class="font-semibold text-gray-800">Leur arme principale ? L'email. Leur but ? Que vous cliquiez sur un lien piégé.</p>
         </section>
 
-        <!-- Slide 3: Gestionnaire de mots de passe -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-             <h2 class="text-3xl font-bold text-blue-800 mb-6">La solution : Le <span class="text-blue-600">Gestionnaire de Mots de Passe</span></h2>
-             <p class="text-lg text-gray-700 mb-4">Impossible de retenir 50 mots de passe complexes ? C'est normal ! Un gestionnaire est un <span class="font-semibold">coffre-fort numérique</span> qui le fait pour vous.</p>
-             <div class="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                <h3 class="font-bold text-blue-800">Comment ça marche ?</h3>
-                <ol class="list-decimal list-inside mt-2 text-gray-700">
-                    <li>Vous ne retenez qu'<span class="font-semibold">UN SEUL</span> mot de passe : celui du coffre-fort (le mot de passe "maître").</li>
-                    <li>Le gestionnaire <span class="font-semibold">crée et sauvegarde</span> des mots de passe ultra-complexes pour chaque site.</li>
-                    <li>Il les <span class="font-semibold">remplit automatiquement</span> quand vous naviguez. Simple et ultra-sécurisé !</li>
-                </ol>
-             </div>
-        </section>
-
-        <!-- Slide 4: Cryptage -->
-        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-blue-800 mb-4">2. Rendre les données illisibles : <span class="text-blue-600">le Cryptage</span></h2>
-            <p class="text-gray-700 mb-6">Crypter une donnée, c'est la transformer en un message secret que seuls vous et le destinataire pouvez lire grâce à une "clé". Voyez par vous-même :</p>
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label for="plain-text" class="font-semibold">Votre message :</label>
-                    <textarea id="plain-text" rows="3" class="w-full p-2 border rounded-md mt-2">Bonjour UIMM</textarea>
-                </div>
-                <div>
-                    <label for="encrypted-text" class="font-semibold">Message crypté :</label>
-                    <textarea id="encrypted-text" rows="3" class="w-full p-2 border rounded-md mt-2 bg-gray-100" readonly></textarea>
-                </div>
-            </div>
-             <div class="text-center mt-4">
-                <button onclick="toggleEncrypt()" id="encrypt-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700">Crypter le message</button>
-            </div>
-        </section>
-
-        <!-- Slide 5: Cloud -->
-        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-blue-800 mb-4">3. Le Coffre-fort de l'entreprise : <span class="text-blue-600">le Cloud</span></h2>
-            <p class="text-lg text-gray-700 mb-6">Stocker sur le Cloud, ce n'est pas "envoyer ses données n'importe où". C'est les confier à des experts de la sécurité.</p>
-            <div class="flex flex-col md:flex-row items-center justify-around text-center mt-8">
-                <div class="w-full md:w-2/5 mb-6 md:mb-0">
-                    <h3 class="text-xl font-bold mb-2">Stockage local (votre PC)</h3>
-                    <div class="text-5xl">💻</div>
-                    <p class="mt-2 text-sm text-gray-600">Risques : Vol, panne, incendie, perte... Une seule copie physique.</p>
-                </div>
-                <div class="text-4xl text-gray-400 mx-8">🛡️</div>
-                 <div class="w-full md:w-2/5">
-                    <h3 class="text-xl font-bold mb-2">Stockage Cloud</h3>
-                    <div class="text-5xl">☁️</div>
-                    <p class="mt-2 text-sm text-gray-600">Sécurité : Gardiens, cryptage, copies multiples... Comme une banque !</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Slide 6: Quiz -->
-        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-blue-800 mb-6">Testons vos connaissances !</h2>
-            <div class="space-y-4">
-                <!-- Question 1 -->
-                <div class="quiz-question" data-answer="false">
-                    <p class="font-semibold">"12345678" est un bon mot de passe car il est long.</p>
-                    <div class="mt-2">
-                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, true)">Vrai</button>
-                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, false)">Faux</button>
-                    </div>
-                    <p class="quiz-feedback text-sm mt-1 text-green-700"><strong>Correct !</strong> La complexité (mélange de caractères) est aussi importante que la longueur.</p>
-                    <p class="quiz-feedback text-sm mt-1 text-red-700"><strong>Incorrect.</strong> Un mot de passe long mais simple est très facile à deviner.</p>
-                </div>
-                 <!-- Question 2 -->
-                <div class="quiz-question" data-answer="true">
-                    <p class="font-semibold">Un gestionnaire de mots de passe me permet d'utiliser un mot de passe différent pour chaque site.</p>
-                    <div class="mt-2">
-                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, true)">Vrai</button>
-                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, false)">Faux</button>
-                    </div>
-                    <p class="quiz-feedback text-sm mt-1 text-green-700"><strong>Correct !</strong> C'est son principal avantage pour la sécurité.</p>
-                    <p class="quiz-feedback text-sm mt-1 text-red-700"><strong>Incorrect.</strong> C'est justement son rôle : générer et stocker un mot de passe unique pour chaque service.</p>
+            <h2 class="text-3xl font-bold text-blue-800 mb-2">Activité : Saurez-vous déjouer le piège ?</h2>
+            <p class="text-gray-600 mb-6 text-center">Vous voici devant votre boîte de réception. Un de ces emails est une tentative de phishing. Cliquez sur les emails pour les lire, et décidez quoi faire.</p>
+            <div class="bg-gray-50 rounded-lg p-4 border">
+                <div id="email-list">
+                    <!-- Les emails seront injectés ici par JS -->
                 </div>
             </div>
         </section>
 
-        <!-- Slide 7: Conclusion -->
-        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
-            <h2 class="text-3xl font-bold text-blue-800 mb-6">Vous êtes maintenant un gardien du numérique !</h2>
-            <p class="text-xl text-gray-700 mb-4">Les 3 réflexes à retenir :<br> <span class="font-semibold text-blue-600">1. Utiliser des mots de passe robustes</span>, <span class="font-semibold text-blue-600">2. Savoir que vos données sont cryptées</span>, et <span class="font-semibold text-blue-600">3. Faire confiance au Cloud sécurisé</span>.</p>
-            <p class="mt-8 text-2xl">Excellent travail !</p>
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+             <h2 class="text-3xl font-bold text-red-700 mb-4">2. Le Ransomware (Rançongiciel)</h2>
+             <p class="text-lg text-gray-700 mb-4">Si vous aviez cliqué sur un mauvais lien, vous auriez pu déclencher un ransomware. C'est un virus qui <span class="font-semibold">chiffre tous vos fichiers</span> et exige une rançon pour vous rendre la clé.</p>
+            <div class="mt-6 p-4 bg-red-50 rounded-lg text-center">
+                <p class="text-5xl">📄 ➡️ 🔒</p>
+                <p class="font-bold text-red-800 mt-2">Vos documents deviennent des coffres-forts dont vous n'avez plus la clé.</p>
+                <p class="text-sm text-gray-700 mt-2">La meilleure défense : la prudence en amont et des sauvegardes régulières.</p>
+            </div>
+        </section>
+
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-yellow-700 mb-4">3. Le "Shadow IT" (Outils non autorisés)</h2>
+            <p class="text-lg text-gray-700 mb-4">C'est l'utilisation d'applications ou services non validés par l'entreprise (ex: WeTransfer, Dropbox personnel, Trello gratuit) pour des tâches professionnelles.</p>
+            <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+                <h3 class="font-bold text-yellow-800">Quels sont les risques ?</h3>
+                <ul class="list-disc list-inside mt-2 text-gray-700">
+                    <li><span class="font-semibold">Fuites de données :</span> Vous ne savez pas où les informations sont stockées.</li>
+                    <li><span class="font-semibold">Absence de supervision :</span> L'entreprise perd le contrôle sur ses propres données.</li>
+                    <li><span class="font-semibold">Failles de sécurité :</span> Ces outils peuvent ne pas avoir le même niveau de sécurité que les outils officiels.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <div id="quiz-container-m2">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4 text-center">Quiz Final : Validez vos réflexes</h2>
+                <div id="quiz-progress-m2" class="text-center text-sm text-gray-500 mb-4"></div>
+                <div id="quiz-question-container-m2" class="bg-gray-50 p-6 rounded-lg">
+                    <p id="quiz-question-text-m2" class="text-lg font-semibold mb-4"></p>
+                    <div id="quiz-options-m2" class="space-y-3"></div>
+                </div>
+                <div id="quiz-feedback-m2" class="mt-4 text-center font-semibold"></div>
+                <div id="quiz-navigation-m2" class="text-center mt-6"></div>
+            </div>
         </section>
     </main>
 
     <footer class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
-            <button id="prev-btn" class="bg-white text-blue-700 px-6 py-2 rounded-lg shadow hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">Précédent</button>
+            <button id="prev-btn" class="bg-white text-blue-700 px-6 py-2 rounded-lg shadow hover:bg-gray-50 disabled:opacity-50">Précédent</button>
             <div id="progress-indicator" class="text-sm text-gray-500"></div>
             <button id="next-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700">Suivant</button>
         </div>
     </footer>
+
+    <!-- Modale pour la simulation de phishing -->
+    <div id="phishing-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 opacity-0 pointer-events-none z-50">
+        <div id="email-content-modal" class="bg-white rounded-lg shadow-2xl max-w-2xl w-full p-6 relative hidden">
+            <!-- Contenu de l'email affiché ici -->
+        </div>
+        <div id="phishing-feedback-modal" class="bg-white rounded-lg shadow-2xl max-w-2xl w-full p-8 text-center relative hidden">
+            <!-- Feedback après clic sur le lien -->
+        </div>
+    </div>
 
     <script>
         let currentSlide = 0;
@@ -171,11 +129,11 @@
         function updateControls() {
             prevBtn.disabled = currentSlide === 0;
             if (currentSlide === slides.length - 1) {
-                nextBtn.textContent = 'Terminer';
+                nextBtn.textContent = 'Terminer le module';
             } else {
                 nextBtn.textContent = 'Suivant';
             }
-            progressIndicator.textContent = `Diapositive ${currentSlide + 1} sur ${slides.length}`;
+            progressIndicator.textContent = `Écran ${currentSlide + 1} sur ${slides.length}`;
         }
 
         prevBtn.addEventListener('click', () => { if (currentSlide > 0) showSlide(currentSlide - 1); });
@@ -185,72 +143,165 @@
         });
         showSlide(0);
 
-        // Password strength checker
-        const passwordInput = document.getElementById('password-input');
-        const passwordBar = document.getElementById('password-strength-bar');
-        const passwordFeedback = document.getElementById('password-feedback');
-        passwordInput.addEventListener('input', () => {
-            const pass = passwordInput.value;
-            let score = 0;
-            if (pass.length > 8) score++;
-            if (pass.length > 12) score++;
-            if (pass.match(/[a-z]/)) score++;
-            if (pass.match(/[A-Z]/)) score++;
-            if (pass.match(/[0-9]/)) score++;
-            if (pass.match(/[^a-zA-Z0-9]/)) score++;
-            
-            let width = (score / 6) * 100;
-            let color = 'bg-red-500';
-            let feedbackText = 'Très Faible';
-
-            if (score > 2) { color = 'bg-orange-500'; feedbackText = 'Moyen'; }
-            if (score > 4) { color = 'bg-green-500'; feedbackText = 'Fort'; }
-            if (pass.length === 0) { width = 0; feedbackText = '&nbsp;'; }
-
-            passwordBar.style.width = width + '%';
-            passwordBar.className = `h-4 rounded-full ${color}`;
-            passwordFeedback.innerHTML = feedbackText;
+        // --- SIMULATION PHISHING ---
+        const emails = [
+            { id: 1, sender: 'Service Paie', subject: 'Votre bulletin de salaire est disponible', isPhishing: false, content: `Bonjour,<br><br>Votre bulletin de salaire pour le mois en cours est maintenant disponible sur le portail RH sécurisé de l'entreprise.<br><br>Cordialement,<br>Le Service Paie` },
+            { id: 2, sender: 'support-info@uimm-serveur.com', subject: 'URGENT: Suspension de votre compte', isPhishing: true, content: `Bonjour,<br><br>Une activité suspecte a été détectée sur votre compte. Par mesure de sécurité, nous l'avons temporairement suspendu.<br><br>Veuillez vérifier votre compte immédiatement en cliquant sur le lien ci-dessous pour éviter une suppression définitive.<br><br><a href="#" onclick="handlePhishingClick(event)" class="text-blue-600 underline">https://uimm-portail.com/verification</a><br><br>Cordialement,<br>Le support technique`},
+            { id: 3, sender: 'Communication Interne', subject: 'Invitation au pot de départ de M. Dupont', isPhishing: false, content: `Bonjour à tous,<br><br>Vous êtes conviés au pot de départ de Jean Dupont qui aura lieu vendredi à 17h en salle de pause.<br><br>Nous comptons sur votre présence !` },
+        ];
+        
+        const emailListContainer = document.getElementById('email-list');
+        emails.forEach(email => {
+            const emailDiv = document.createElement('div');
+            emailDiv.className = 'email-item flex justify-between items-center p-3 border-b hover:bg-gray-200';
+            emailDiv.innerHTML = `<div class="font-semibold">${email.sender}</div><div class="text-gray-700">${email.subject}</div>`;
+            emailDiv.onclick = () => openEmail(email.id);
+            emailListContainer.appendChild(emailDiv);
         });
 
-        // Encryption simulator
-        let isEncrypted = false;
-        const plainText = document.getElementById('plain-text');
-        const encryptedText = document.getElementById('encrypted-text');
-        const encryptBtn = document.getElementById('encrypt-btn');
-        function simpleEncrypt(text) {
-            return text.split('').map(char => String.fromCharCode(char.charCodeAt(0) + 5)).join('');
+        const phishingModal = document.getElementById('phishing-modal');
+        const emailContentModal = document.getElementById('email-content-modal');
+        const phishingFeedbackModal = document.getElementById('phishing-feedback-modal');
+
+        function openModal() {
+            phishingModal.classList.remove('opacity-0', 'pointer-events-none');
         }
-        function simpleDecrypt(text) {
-            return text.split('').map(char => String.fromCharCode(char.charCodeAt(0) - 5)).join('');
+        function closeModal() {
+            phishingModal.classList.add('opacity-0', 'pointer-events-none');
+            emailContentModal.classList.add('hidden');
+            phishingFeedbackModal.classList.add('hidden');
         }
-        function toggleEncrypt() {
-            if (!isEncrypted) {
-                encryptedText.value = simpleEncrypt(plainText.value);
-                encryptBtn.textContent = 'Décrypter le message';
-            } else {
-                encryptedText.value = '';
-                encryptBtn.textContent = 'Crypter le message';
-            }
-            isEncrypted = !isEncrypted;
+        
+        function openEmail(id) {
+            const email = emails.find(e => e.id === id);
+            emailContentModal.innerHTML = `
+                <h3 class="text-lg font-bold mb-2">${email.subject}</h3>
+                <p class="text-sm text-gray-500 mb-4">De : ${email.sender}</p>
+                <div class="text-gray-800">${email.content}</div>
+                <div class="mt-6 text-right">
+                    <button onclick="closeModal()" class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400">Fermer</button>
+                    ${email.isPhishing ? `<button onclick="reportPhishing()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 ml-2">Signaler comme Phishing</button>` : ''}
+                </div>
+            `;
+            emailContentModal.classList.remove('hidden');
+            phishingFeedbackModal.classList.add('hidden');
+            openModal();
         }
 
-        // Quiz
-        function checkAnswer(button, answer) {
-            const questionDiv = button.closest('.quiz-question');
-            const correctAnswer = questionDiv.dataset.answer === 'true';
-            const feedbackElements = questionDiv.querySelectorAll('.quiz-feedback');
-            const buttons = questionDiv.querySelectorAll('.quiz-btn');
+        function handlePhishingClick(event) {
+            event.preventDefault();
+            phishingFeedbackModal.innerHTML = `
+                <h2 class="text-3xl font-bold text-red-600 mb-4">PIÉGE !</h2>
+                <p class="text-lg mb-4">Vous avez cliqué sur un lien de phishing. Dans la réalité, un logiciel malveillant aurait pu être installé.</p>
+                <div class="text-left bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-bold mb-2">Les indices qui auraient dû vous alerter :</h3>
+                    <ul class="list-disc list-inside text-sm">
+                        <li><b>Expéditeur suspect :</b> "uimm-serveur.com" n'est pas le domaine officiel.</li>
+                        <li><b>Caractère d'urgence :</b> "URGENT", "suspension", "suppression définitive" sont des leviers pour vous faire paniquer et agir vite.</li>
+                        <li><b>Lien douteux :</b> Même s'il ressemble à un lien légitime, il faut toujours vérifier l'adresse exacte avant de cliquer.</li>
+                    </ul>
+                </div>
+                <button onclick="closeModal()" class="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg shadow">J'ai compris</button>
+            `;
+            emailContentModal.classList.add('hidden');
+            phishingFeedbackModal.classList.remove('hidden');
+        }
 
-            if (answer === correctAnswer) {
-                button.classList.add('bg-green-500', 'text-white');
-                feedbackElements[0].style.display = 'block';
-                feedbackElements[1].style.display = 'none';
-            } else {
-                button.classList.add('bg-red-500', 'text-white');
-                feedbackElements[0].style.display = 'none';
-                feedbackElements[1].style.display = 'block';
+        function reportPhishing() {
+             phishingFeedbackModal.innerHTML = `
+                <h2 class="text-3xl font-bold text-green-600 mb-4">EXCELLENT RÉFLEXE !</h2>
+                <p class="text-lg mb-4">Vous avez identifié la menace sans tomber dans le piège.</p>
+                <p>Signaler cet email au service informatique est la meilleure chose à faire. Vous protégez ainsi toute l'entreprise.</p>
+                <button onclick="closeModal()" class="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg shadow">Continuer</button>
+            `;
+            emailContentModal.classList.add('hidden');
+            phishingFeedbackModal.classList.remove('hidden');
+        }
+
+        // --- QUIZ MODULE 2 ---
+        const quizDataM2 = [
+            { question: "Lequel de ces mots de passe est le plus sécurisé ?", options: ["Motdepasse2024", "Mdp!", "MonChienSappelleMedor", "Tr@v&il-L!vr3-P0rt3"], answer: 3 },
+            { question: "Vous recevez un email URGENT de la 'Direction Informatique' vous demandant de cliquer sur un lien pour réinitialiser votre mot de passe. C'est probablement...", options: ["Une procédure standard", "Une tentative de phishing", "Un bug du système", "Un email informatif"], answer: 1 },
+            { question: "Un ransomware est un logiciel malveillant qui...", options: ["Vole vos mots de passe", "Affiche de la publicité non désirée", "Chiffre vos fichiers et demande une rançon", "Ralentit votre ordinateur"], answer: 2 },
+            { question: "Utiliser votre compte Dropbox personnel pour partager un gros fichier client est un exemple de...", options: ["Bonne initiative", "Cloud Computing", "Shadow IT", "Sauvegarde sécurisée"], answer: 2 },
+            { question: "Le principal danger du 'Shadow IT' pour une entreprise est...", options: ["Le coût des abonnements personnels", "La perte de contrôle et le risque de fuite des données de l'entreprise", "La surcharge du réseau internet", "La jalousie entre collègues"], answer: 1 },
+            { question: "Vous trouvez une clé USB inconnue sur le parking de l'entreprise. Que faites-vous ?", options: ["Vous la branchez sur votre PC pour voir à qui elle appartient", "Vous la gardez pour vous", "Vous ne la touchez pas et prévenez la sécurité ou le service IT", "Vous la jetez à la poubelle"], answer: 2 },
+            { question: "Quel est le meilleur réflexe face à un email inattendu contenant une pièce jointe ?", options: ["L'ouvrir immédiatement pour voir ce que c'est", "Contacter l'expéditeur par un autre moyen pour confirmer l'envoi", "La transférer au service informatique sans l'ouvrir", "Supprimer l'email directement"], answer: 1 },
+            { question: "Stocker un fichier client important sur le Cloud de l'entreprise plutôt que sur le bureau de votre PC permet de...", options: ["Partager plus facilement le fichier avec des personnes extérieures", "Garantir sa sauvegarde et sa sécurité même en cas de vol ou de panne de votre ordinateur", "Le rendre accessible uniquement depuis votre bureau", "Le modifier plus rapidement"], answer: 1 },
+            { question: "Un collègue vous appelle et vous demande votre mot de passe en urgence pour dépanner un client. Vous devriez...", options: ["Lui donner, car c'est un collègue de confiance", "Refuser poliment et lui suggérer de contacter le service informatique", "Lui donner mais le changer juste après", "Raccrocher sans rien dire"], answer: 1 },
+            { question: "Pourquoi 'Azerty123' est-il un mauvais mot de passe ?", options: ["Il est trop court", "Il n'a pas de symbole", "C'est une suite logique et très courante, donc facile à deviner pour un programme", "Il est difficile à retenir"], answer: 2 },
+        ];
+        
+        let currentQuestionM2 = 0;
+        let scoreM2 = 0;
+        const quizContainerM2 = document.getElementById('quiz-container-m2');
+        if (quizContainerM2) {
+            const questionTextElM2 = document.getElementById('quiz-question-text-m2');
+            const optionsElM2 = document.getElementById('quiz-options-m2');
+            const feedbackElM2 = document.getElementById('quiz-feedback-m2');
+            const progressElM2 = document.getElementById('quiz-progress-m2');
+            const navigationElM2 = document.getElementById('quiz-navigation-m2');
+            
+            function loadQuizM2() {
+                if (currentQuestionM2 < quizDataM2.length) {
+                    const q = quizDataM2[currentQuestionM2];
+                    progressElM2.textContent = `Question ${currentQuestionM2 + 1} sur ${quizDataM2.length}`;
+                    questionTextElM2.textContent = q.question;
+                    optionsElM2.innerHTML = '';
+                    feedbackElM2.innerHTML = '';
+                    navigationElM2.innerHTML = '';
+
+                    q.options.forEach((option, index) => {
+                        const button = document.createElement('button');
+                        button.textContent = option;
+                        button.className = 'w-full text-left p-3 bg-white border rounded-lg hover:bg-gray-100 quiz-option';
+                        button.onclick = () => selectAnswerM2(index, q.answer);
+                        optionsElM2.appendChild(button);
+                    });
+                } else {
+                    showFinalScoreM2();
+                }
             }
-            buttons.forEach(btn => btn.disabled = true);
+
+            function selectAnswerM2(selectedIndex, correctIndex) {
+                const buttons = optionsElM2.getElementsByTagName('button');
+                Array.from(buttons).forEach(btn => btn.disabled = true);
+
+                if (selectedIndex === correctIndex) {
+                    buttons[selectedIndex].classList.add('bg-green-200', 'border-green-500');
+                    feedbackElM2.textContent = 'Bonne réponse !';
+                    feedbackElM2.className = 'mt-4 text-center font-semibold text-green-700';
+                    scoreM2++;
+                } else {
+                    buttons[selectedIndex].classList.add('bg-red-200', 'border-red-500');
+                    buttons[correctIndex].classList.add('bg-green-200', 'border-green-500');
+                    feedbackElM2.textContent = 'Réponse incorrecte.';
+                    feedbackElM2.className = 'mt-4 text-center font-semibold text-red-700';
+                }
+
+                const nextQuestionBtn = document.createElement('button');
+                nextQuestionBtn.textContent = 'Question Suivante →';
+                nextQuestionBtn.className = 'bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700';
+                nextQuestionBtn.onclick = () => {
+                    currentQuestionM2++;
+                    loadQuizM2();
+                };
+                navigationElM2.appendChild(nextQuestionBtn);
+            }
+
+            function showFinalScoreM2() {
+                document.getElementById('quiz-question-container-m2').style.display = 'none';
+                navigationElM2.innerHTML = '';
+                let message = `Votre score final : ${scoreM2} / ${quizDataM2.length}.`;
+                if(scoreM2 > 7) message += " Vos réflexes de sécurité sont excellents !";
+                else if(scoreM2 > 4) message += " Vous avez les bases, continuez à être vigilant !";
+                else message += " La sécurité est un point crucial, n'hésitez pas à revoir les bonnes pratiques.";
+
+                feedbackElM2.textContent = message;
+                feedbackElM2.className = 'mt-4 text-center font-bold text-xl text-blue-800';
+            }
+            
+            document.addEventListener('DOMContentLoaded', loadQuizM2());
         }
     </script>
 </body>

@@ -1,1 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3 : Les Outils Numériques Adaptés</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .slide { display: none; }
+        .slide.active { 
+            display: flex; 
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-option { transition: background-color 0.2s; }
+        .word-preview-header, .word-preview-footer {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-3 flex items-center">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-16 w-auto mr-6">
+            <div>
+                <h1 class="text-2xl font-bold text-purple-800">Module 3 : Les Outils Numériques</h1>
+                <p class="text-sm text-gray-500">Maîtrisez votre environnement de travail numérique.</p>
+            </div>
+        </div>
+    </header>
+
+    <main id="slideshow-container" class="flex-grow container mx-auto p-4 md:p-8 flex flex-col items-center justify-center">
+        <!-- Slides de contenu -->
+        <section class="slide active w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
+            <h2 class="text-4xl font-bold text-purple-800 mb-4">Votre Boîte à Outils Numérique</h2>
+            <p class="text-xl text-gray-600">Apprenons à utiliser les outils du quotidien de manière efficace et professionnelle.</p>
+        </section>
+
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-purple-800 mb-4">1. Windows : Les Fondations</h2>
+            <p class="text-lg text-gray-700 mb-4">Windows est votre <span class="font-semibold">système d'exploitation</span>. C'est le chef d'orchestre qui fait fonctionner tous vos logiciels et gère vos fichiers.</p>
+            <div class="mt-6 p-4 bg-purple-50 rounded-lg">
+                <h3 class="font-bold text-purple-800">Le réflexe clé : L'Explorateur de Fichiers</h3>
+                <p class="text-gray-700 mt-2">Une organisation <span class="font-semibold">logique</span> de vos dossiers et fichiers (par projet, par date, par client...) est la base de l'efficacité. Un fichier bien nommé est un fichier retrouvé !</p>
+            </div>
+        </section>
+
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-purple-800 mb-2">2. Word : Le Traitement de Texte Pro</h2>
+            <p class="text-gray-600 mb-6 text-center">Un document bien présenté inspire confiance. Mettons en pratique !</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold mb-2">✅ Votre mission :</h3>
+                    <div class="space-y-2 text-sm">
+                        <div><label><input type="checkbox" onchange="updatePreview('header', this.checked)"> Ajouter un en-tête avec le logo</label></div>
+                        <div><label><input type="checkbox" onchange="updatePreview('title', this.checked)"> Appliquer le style "Titre 1" au titre</label></div>
+                        <div><label><input type="checkbox" onchange="updatePreview('body', this.checked)"> Justifier le corps du texte</label></div>
+                        <div><label><input type="checkbox" onchange="updatePreview('footer', this.checked)"> Insérer un pied de page avec le n° de page</label></div>
+                    </div>
+                </div>
+                <div class="bg-gray-100 border p-4 rounded-lg h-64 overflow-y-auto">
+                    <div id="preview-header" class="word-preview-header text-right text-xs text-gray-500 mb-2">Logo UIMM</div>
+                    <h4 id="preview-title" class="text-lg">Rapport d'Activité</h4>
+                    <p id="preview-body" class="text-sm">Ceci est le résumé de nos activités pour le trimestre. Le travail accompli a été significatif et les résultats sont prometteurs pour l'avenir de nos projets.</p>
+                    <div id="preview-footer" class="word-preview-footer text-center text-xs text-gray-500 mt-16 pt-2 border-t">Page 1</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+             <h2 class="text-3xl font-bold text-purple-800 mb-4">3. Internet : Naviguer avec Efficacité</h2>
+             <p class="text-lg text-gray-700 mb-4">Savoir naviguer, ce n'est pas juste surfer, c'est <span class="font-semibold">trouver une information fiable rapidement</span>.</p>
+             <div class="mt-6 flex flex-col md:flex-row justify-around text-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="font-bold text-red-600">À Éviter 🚩</h3>
+                    <ul class="text-sm mt-2">
+                        <li>Forums anonymes</li>
+                        <li>Blogs d'opinions personnelles</li>
+                        <li>Sources sans date ou auteur</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-green-600">À Privilégier ✅</h3>
+                    <ul class="text-sm mt-2">
+                        <li>Sites gouvernementaux (.gouv.fr)</li>
+                        <li>Publications scientifiques / universitaires</li>
+                        <li>Presse reconnue</li>
+                    </ul>
+                </div>
+             </div>
+        </section>
+
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-purple-800 mb-4">4. Visioconférence : Votre Image Professionnelle</h2>
+            <p class="text-gray-700 mb-6 text-center">Une bonne préparation technique est une marque de respect pour vos interlocuteurs.</p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-red-700 text-center mb-2">À ne pas faire</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>❌ Contre-jour (fenêtre derrière vous)</li>
+                        <li>❌ Arrière-plan désordonné</li>
+                        <li>❌ Caméra trop basse (contre-plongée)</li>
+                        <li>❌ Micro non coupé par défaut</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-green-700 text-center mb-2">Les Bonnes Pratiques</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>✅ Lumière face à vous</li>
+                        <li>✅ Arrière-plan neutre ou flouté</li>
+                        <li>✅ Caméra à hauteur des yeux</li>
+                        <li>✅ Se mettre en muet en arrivant</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <div id="quiz-container-m3">
+                <h2 class="text-2xl font-bold text-purple-800 mb-4 text-center">Quiz Final : Testez votre Efficacité</h2>
+                <div id="quiz-progress-m3" class="text-center text-sm text-gray-500 mb-4"></div>
+                <div id="quiz-question-container-m3" class="bg-gray-50 p-6 rounded-lg">
+                    <p id="quiz-question-text-m3" class="text-lg font-semibold mb-4"></p>
+                    <div id="quiz-options-m3" class="space-y-3"></div>
+                </div>
+                <div id="quiz-feedback-m3" class="mt-4 text-center font-semibold"></div>
+                <div id="quiz-navigation-m3" class="text-center mt-6"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+            <button id="prev-btn" class="bg-white text-purple-700 px-6 py-2 rounded-lg shadow hover:bg-gray-50 disabled:opacity-50">Précédent</button>
+            <div id="progress-indicator" class="text-sm text-gray-500"></div>
+            <button id="next-btn" class="bg-purple-600 text-white px-6 py-2 rounded-lg shadow hover:bg-purple-700">Suivant</button>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            currentSlide = index;
+            updateControls();
+        }
+
+        function updateControls() {
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === slides.length - 1) {
+                nextBtn.textContent = 'Terminer le module';
+            } else {
+                nextBtn.textContent = 'Suivant';
+            }
+            progressIndicator.textContent = `Écran ${currentSlide + 1} sur ${slides.length}`;
+        }
+
+        prevBtn.addEventListener('click', () => { if (currentSlide > 0) showSlide(currentSlide - 1); });
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+            else window.location.href = 'plan.html';
+        });
+        showSlide(0);
+
+        // --- Activité Word ---
+        function updatePreview(element, isChecked) {
+            const el = document.getElementById(`preview-${element}`);
+            if (!el) return;
+
+            switch(element) {
+                case 'header':
+                case 'footer':
+                    el.style.opacity = isChecked ? '1' : '0';
+                    break;
+                case 'title':
+                    el.style.fontWeight = isChecked ? 'bold' : 'normal';
+                    break;
+                case 'body':
+                    el.style.textAlign = isChecked ? 'justify' : 'left';
+                    break;
+            }
+        }
+
+        // --- QUIZ MODULE 3 ---
+        const quizDataM3 = [
+            { question: "Pour une organisation optimale, comment devriez-vous nommer un rapport de ventes de septembre 2025 ?", options: ["rapport", "ventes", "Rapport_Ventes_2025-09.docx", "mon doc.docx"], answer: 2 },
+            { question: "Dans Word, pourquoi est-il préférable d'utiliser les 'Styles' (Titre 1, Titre 2) plutôt que de changer manuellement la taille et la police ?", options: ["C'est plus joli", "Pour garantir une mise en page cohérente et générer un sommaire automatique", "Cela prend moins de place sur le disque dur", "C'est la seule façon de mettre du gras"], answer: 1 },
+            { question: "Quelle source d'information est généralement la plus fiable pour une recherche professionnelle ?", options: ["Un commentaire sur une vidéo YouTube", "Un article de blog personnel", "Une publication sur le site de l'INSEE (.fr)", "Un post sur un forum de discussion"], answer: 2 },
+            { question: "Quel est le premier réflexe à avoir en rejoignant une visioconférence avec plusieurs participants ?", options: ["Activer sa caméra", "Couper son micro pour éviter les bruits de fond", "Dire bonjour à tout le monde", "Partager son écran"], answer: 1 },
+            { question: "Vous devez préparer une synthèse sur un sujet, la rédiger et la présenter à un collègue à distance. Quel est le bon ordre d'utilisation des outils ?", options: ["Word > Visioconférence > Internet", "Visioconférence > Word > Internet", "Internet > Word > Visioconférence", "Word > Internet > Visioconférence"], answer: 2 },
+            { question: "Quel est le raccourci clavier universel pour SAUVEGARDER votre travail sur la plupart des logiciels (Word, etc.) ?", options: ["Ctrl + P", "Ctrl + C", "Ctrl + G", "Ctrl + S"], answer: 3 },
+            { question: "Sous Windows, quel raccourci clavier vous permet de basculer rapidement entre vos applications ouvertes ?", options: ["Alt + F4", "Windows + D", "Alt + Tab", "Ctrl + Alt + Suppr"], answer: 2 },
+            { question: "Sur un site web, la présence d'un cadenas 🔒 à côté de l'adresse (https://) signifie que...", options: ["Le site est très populaire", "Le site est payant", "La connexion entre vous et le site est chiffrée et sécurisée", "Le contenu du site a été vérifié par le gouvernement"], answer: 2 },
+            { question: "Pour une image professionnelle en visioconférence, la source de lumière principale doit être...", options: ["Derrière vous", "Sur le côté", "Face à vous", "Éteinte pour plus de discrétion"], answer: 2 },
+            { question: "L'objectif principal de la maîtrise de ces outils est de...", options: ["Remplacer toute interaction humaine", "Rendre le travail plus complexe", "Travailler plus vite, de manière plus organisée et plus professionnelle", "Pouvoir travailler uniquement de chez soi"], answer: 2 },
+        ];
+        
+        let currentQuestionM3 = 0;
+        let scoreM3 = 0;
+        const quizContainerM3 = document.getElementById('quiz-container-m3');
+        if (quizContainerM3) {
+            const questionTextElM3 = document.getElementById('quiz-question-text-m3');
+            const optionsElM3 = document.getElementById('quiz-options-m3');
+            const feedbackElM3 = document.getElementById('quiz-feedback-m3');
+            const progressElM3 = document.getElementById('quiz-progress-m3');
+            const navigationElM3 = document.getElementById('quiz-navigation-m3');
+            
+            function loadQuizM3() {
+                if (currentQuestionM3 < quizDataM3.length) {
+                    const q = quizDataM3[currentQuestionM3];
+                    progressElM3.textContent = `Question ${currentQuestionM3 + 1} sur ${quizDataM3.length}`;
+                    questionTextElM3.textContent = q.question;
+                    optionsElM3.innerHTML = '';
+                    feedbackElM3.innerHTML = '';
+                    navigationElM3.innerHTML = '';
+
+                    q.options.forEach((option, index) => {
+                        const button = document.createElement('button');
+                        button.textContent = option;
+                        button.className = 'w-full text-left p-3 bg-white border rounded-lg hover:bg-gray-100 quiz-option';
+                        button.onclick = () => selectAnswerM3(index, q.answer);
+                        optionsElM3.appendChild(button);
+                    });
+                } else {
+                    showFinalScoreM3();
+                }
+            }
+
+            function selectAnswerM3(selectedIndex, correctIndex) {
+                const buttons = optionsElM3.getElementsByTagName('button');
+                Array.from(buttons).forEach(btn => btn.disabled = true);
+
+                if (selectedIndex === correctIndex) {
+                    buttons[selectedIndex].classList.add('bg-green-200', 'border-green-500');
+                    feedbackElM3.textContent = 'Bonne réponse !';
+                    feedbackElM3.className = 'mt-4 text-center font-semibold text-green-700';
+                    scoreM3++;
+                } else {
+                    buttons[selectedIndex].classList.add('bg-red-200', 'border-red-500');
+                    buttons[correctIndex].classList.add('bg-green-200', 'border-green-500');
+                    feedbackElM3.textContent = 'Réponse incorrecte.';
+                    feedbackElM3.className = 'mt-4 text-center font-semibold text-red-700';
+                }
+
+                const nextQuestionBtn = document.createElement('button');
+                nextQuestionBtn.textContent = 'Question Suivante →';
+                nextQuestionBtn.className = 'bg-purple-600 text-white px-5 py-2 rounded-lg shadow hover:bg-purple-700';
+                nextQuestionBtn.onclick = () => {
+                    currentQuestionM3++;
+                    loadQuizM3();
+                };
+                navigationElM3.appendChild(nextQuestionBtn);
+            }
+
+            function showFinalScoreM3() {
+                document.getElementById('quiz-question-container-m3').style.display = 'none';
+                navigationElM3.innerHTML = '';
+                let message = `Votre score final : ${scoreM3} / ${quizDataM3.length}.`;
+                if(scoreM3 > 7) message += " Vous êtes un utilisateur averti et efficace !";
+                else if(scoreM3 > 4) message += " Vous maîtrisez les bases, un peu de pratique vous rendra expert.";
+                else message += " N'hésitez pas à revoir les bonnes pratiques pour gagner en productivité.";
+
+                feedbackElM3.textContent = message;
+                feedbackElM3.className = 'mt-4 text-center font-bold text-xl text-purple-800';
+            }
+            
+            document.addEventListener('DOMContentLoaded', loadQuizM3());
+        }
+
+        document.addEventListener('DOMContentLoaded', showSlide(0));
+    </script>
+</body>
+</html>
 

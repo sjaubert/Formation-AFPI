@@ -1,1 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 : Sécurisation des Données</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .slide { display: none; }
+        .slide.active { 
+            display: flex; 
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #password-strength-bar {
+            transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+        .quiz-btn { transition: all 0.2s; }
+        .quiz-feedback { display: none; }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-3 flex items-center">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-16 w-auto mr-6">
+            <div>
+                <h1 class="text-2xl font-bold text-blue-800">Module 2 : Sécurisation des Données</h1>
+                <p class="text-sm text-gray-500">Protégez vos informations et celles de l'entreprise.</p>
+            </div>
+        </div>
+    </header>
+
+    <main id="slideshow-container" class="flex-grow container mx-auto p-4 md:p-8 flex flex-col items-center justify-center">
+        <!-- Slide 1: Titre -->
+        <section class="slide active w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
+            <h2 class="text-4xl font-bold text-blue-800 mb-4">La sécurité numérique, c'est l'affaire de tous !</h2>
+            <p class="text-xl text-gray-600">Apprenons ensemble les bons réflexes pour protéger nos données les plus précieuses.</p>
+            <p class="text-center text-5xl mt-8">🔐</p>
+        </section>
+
+        <!-- Slide 2: Mot de passe -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-blue-800 mb-4">1. Le Gardien de votre vie numérique : <span class="text-blue-600">le Mot de Passe</span></h2>
+            <p class="text-gray-700 mb-6">Un bon mot de passe, c'est comme la porte blindée de votre maison. Testez la solidité de votre porte :</p>
+            <div>
+                <label for="password-input" class="font-semibold">Testez un mot de passe :</label>
+                <input type="text" id="password-input" class="w-full p-2 border rounded-md mt-2" placeholder="Tapez ici pour voir la jauge...">
+                <div class="w-full bg-gray-200 rounded-full h-4 mt-3">
+                    <div id="password-strength-bar" class="h-4 rounded-full" style="width: 0%"></div>
+                </div>
+                <p id="password-feedback" class="text-sm mt-2 text-center font-semibold">&nbsp;</p>
+            </div>
+             <p class="mt-4 text-sm text-gray-600 p-3 bg-gray-50 rounded-lg">Un mot de passe robuste contient : <span class="font-semibold">+12 caractères, Majuscules, minuscules, chiffres et symboles.</span></p>
+        </section>
+
+        <!-- Slide 3: Gestionnaire de mots de passe -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+             <h2 class="text-3xl font-bold text-blue-800 mb-6">La solution : Le <span class="text-blue-600">Gestionnaire de Mots de Passe</span></h2>
+             <p class="text-lg text-gray-700 mb-4">Impossible de retenir 50 mots de passe complexes ? C'est normal ! Un gestionnaire est un <span class="font-semibold">coffre-fort numérique</span> qui le fait pour vous.</p>
+             <div class="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                <h3 class="font-bold text-blue-800">Comment ça marche ?</h3>
+                <ol class="list-decimal list-inside mt-2 text-gray-700">
+                    <li>Vous ne retenez qu'<span class="font-semibold">UN SEUL</span> mot de passe : celui du coffre-fort (le mot de passe "maître").</li>
+                    <li>Le gestionnaire <span class="font-semibold">crée et sauvegarde</span> des mots de passe ultra-complexes pour chaque site.</li>
+                    <li>Il les <span class="font-semibold">remplit automatiquement</span> quand vous naviguez. Simple et ultra-sécurisé !</li>
+                </ol>
+             </div>
+        </section>
+
+        <!-- Slide 4: Cryptage -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-blue-800 mb-4">2. Rendre les données illisibles : <span class="text-blue-600">le Cryptage</span></h2>
+            <p class="text-gray-700 mb-6">Crypter une donnée, c'est la transformer en un message secret que seuls vous et le destinataire pouvez lire grâce à une "clé". Voyez par vous-même :</p>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="plain-text" class="font-semibold">Votre message :</label>
+                    <textarea id="plain-text" rows="3" class="w-full p-2 border rounded-md mt-2">Bonjour UIMM</textarea>
+                </div>
+                <div>
+                    <label for="encrypted-text" class="font-semibold">Message crypté :</label>
+                    <textarea id="encrypted-text" rows="3" class="w-full p-2 border rounded-md mt-2 bg-gray-100" readonly></textarea>
+                </div>
+            </div>
+             <div class="text-center mt-4">
+                <button onclick="toggleEncrypt()" id="encrypt-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700">Crypter le message</button>
+            </div>
+        </section>
+
+        <!-- Slide 5: Cloud -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-blue-800 mb-4">3. Le Coffre-fort de l'entreprise : <span class="text-blue-600">le Cloud</span></h2>
+            <p class="text-lg text-gray-700 mb-6">Stocker sur le Cloud, ce n'est pas "envoyer ses données n'importe où". C'est les confier à des experts de la sécurité.</p>
+            <div class="flex flex-col md:flex-row items-center justify-around text-center mt-8">
+                <div class="w-full md:w-2/5 mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">Stockage local (votre PC)</h3>
+                    <div class="text-5xl">💻</div>
+                    <p class="mt-2 text-sm text-gray-600">Risques : Vol, panne, incendie, perte... Une seule copie physique.</p>
+                </div>
+                <div class="text-4xl text-gray-400 mx-8">🛡️</div>
+                 <div class="w-full md:w-2/5">
+                    <h3 class="text-xl font-bold mb-2">Stockage Cloud</h3>
+                    <div class="text-5xl">☁️</div>
+                    <p class="mt-2 text-sm text-gray-600">Sécurité : Gardiens, cryptage, copies multiples... Comme une banque !</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 6: Quiz -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6">Testons vos connaissances !</h2>
+            <div class="space-y-4">
+                <!-- Question 1 -->
+                <div class="quiz-question" data-answer="false">
+                    <p class="font-semibold">"12345678" est un bon mot de passe car il est long.</p>
+                    <div class="mt-2">
+                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, true)">Vrai</button>
+                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, false)">Faux</button>
+                    </div>
+                    <p class="quiz-feedback text-sm mt-1 text-green-700"><strong>Correct !</strong> La complexité (mélange de caractères) est aussi importante que la longueur.</p>
+                    <p class="quiz-feedback text-sm mt-1 text-red-700"><strong>Incorrect.</strong> Un mot de passe long mais simple est très facile à deviner.</p>
+                </div>
+                 <!-- Question 2 -->
+                <div class="quiz-question" data-answer="true">
+                    <p class="font-semibold">Un gestionnaire de mots de passe me permet d'utiliser un mot de passe différent pour chaque site.</p>
+                    <div class="mt-2">
+                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, true)">Vrai</button>
+                        <button class="quiz-btn bg-gray-200 px-4 py-1 rounded hover:bg-gray-300" onclick="checkAnswer(this, false)">Faux</button>
+                    </div>
+                    <p class="quiz-feedback text-sm mt-1 text-green-700"><strong>Correct !</strong> C'est son principal avantage pour la sécurité.</p>
+                    <p class="quiz-feedback text-sm mt-1 text-red-700"><strong>Incorrect.</strong> C'est justement son rôle : générer et stocker un mot de passe unique pour chaque service.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Conclusion -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6">Vous êtes maintenant un gardien du numérique !</h2>
+            <p class="text-xl text-gray-700 mb-4">Les 3 réflexes à retenir :<br> <span class="font-semibold text-blue-600">1. Utiliser des mots de passe robustes</span>, <span class="font-semibold text-blue-600">2. Savoir que vos données sont cryptées</span>, et <span class="font-semibold text-blue-600">3. Faire confiance au Cloud sécurisé</span>.</p>
+            <p class="mt-8 text-2xl">Excellent travail !</p>
+        </section>
+    </main>
+
+    <footer class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+            <button id="prev-btn" class="bg-white text-blue-700 px-6 py-2 rounded-lg shadow hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">Précédent</button>
+            <div id="progress-indicator" class="text-sm text-gray-500"></div>
+            <button id="next-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700">Suivant</button>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressIndicator = document.getElementById('progress-indicator');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            currentSlide = index;
+            updateControls();
+        }
+
+        function updateControls() {
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === slides.length - 1) {
+                nextBtn.textContent = 'Terminer';
+            } else {
+                nextBtn.textContent = 'Suivant';
+            }
+            progressIndicator.textContent = `Diapositive ${currentSlide + 1} sur ${slides.length}`;
+        }
+
+        prevBtn.addEventListener('click', () => { if (currentSlide > 0) showSlide(currentSlide - 1); });
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+            else window.location.href = 'plan.html';
+        });
+        showSlide(0);
+
+        // Password strength checker
+        const passwordInput = document.getElementById('password-input');
+        const passwordBar = document.getElementById('password-strength-bar');
+        const passwordFeedback = document.getElementById('password-feedback');
+        passwordInput.addEventListener('input', () => {
+            const pass = passwordInput.value;
+            let score = 0;
+            if (pass.length > 8) score++;
+            if (pass.length > 12) score++;
+            if (pass.match(/[a-z]/)) score++;
+            if (pass.match(/[A-Z]/)) score++;
+            if (pass.match(/[0-9]/)) score++;
+            if (pass.match(/[^a-zA-Z0-9]/)) score++;
+            
+            let width = (score / 6) * 100;
+            let color = 'bg-red-500';
+            let feedbackText = 'Très Faible';
+
+            if (score > 2) { color = 'bg-orange-500'; feedbackText = 'Moyen'; }
+            if (score > 4) { color = 'bg-green-500'; feedbackText = 'Fort'; }
+            if (pass.length === 0) { width = 0; feedbackText = '&nbsp;'; }
+
+            passwordBar.style.width = width + '%';
+            passwordBar.className = `h-4 rounded-full ${color}`;
+            passwordFeedback.innerHTML = feedbackText;
+        });
+
+        // Encryption simulator
+        let isEncrypted = false;
+        const plainText = document.getElementById('plain-text');
+        const encryptedText = document.getElementById('encrypted-text');
+        const encryptBtn = document.getElementById('encrypt-btn');
+        function simpleEncrypt(text) {
+            return text.split('').map(char => String.fromCharCode(char.charCodeAt(0) + 5)).join('');
+        }
+        function simpleDecrypt(text) {
+            return text.split('').map(char => String.fromCharCode(char.charCodeAt(0) - 5)).join('');
+        }
+        function toggleEncrypt() {
+            if (!isEncrypted) {
+                encryptedText.value = simpleEncrypt(plainText.value);
+                encryptBtn.textContent = 'Décrypter le message';
+            } else {
+                encryptedText.value = '';
+                encryptBtn.textContent = 'Crypter le message';
+            }
+            isEncrypted = !isEncrypted;
+        }
+
+        // Quiz
+        function checkAnswer(button, answer) {
+            const questionDiv = button.closest('.quiz-question');
+            const correctAnswer = questionDiv.dataset.answer === 'true';
+            const feedbackElements = questionDiv.querySelectorAll('.quiz-feedback');
+            const buttons = questionDiv.querySelectorAll('.quiz-btn');
+
+            if (answer === correctAnswer) {
+                button.classList.add('bg-green-500', 'text-white');
+                feedbackElements[0].style.display = 'block';
+                feedbackElements[1].style.display = 'none';
+            } else {
+                button.classList.add('bg-red-500', 'text-white');
+                feedbackElements[0].style.display = 'none';
+                feedbackElements[1].style.display = 'block';
+            }
+            buttons.forEach(btn => btn.disabled = true);
+        }
+    </script>
+</body>
+</html>
 

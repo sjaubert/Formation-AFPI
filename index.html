@@ -9,7 +9,15 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .slide { display: none; }
-        .slide.active { display: block; }
+        .slide.active { 
+            display: flex; 
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .post-it {
             background-color: #fffbe9;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
@@ -19,6 +27,8 @@
         .draggable { cursor: grab; }
         .drop-zone { border-style: dashed; }
         .drop-zone.drag-over { background-color: #e0f2f1; border-color: #14b8a6; }
+        .quiz-btn { transition: all 0.2s; }
+        .quiz-feedback { display: none; }
     </style>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -37,72 +47,81 @@
 
     <main id="slideshow-container" class="flex-grow container mx-auto p-4 md:p-8 flex flex-col items-center justify-center">
         <!-- Slide 1: Titre -->
-        <section class="slide active w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center">
+        <section class="slide active w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
             <h2 class="text-4xl font-bold text-teal-800 mb-4">Bienvenue dans le Module 1</h2>
-            <p class="text-xl text-gray-600">Découvrons ensemble les enjeux de la transition numérique et comment elle transforme notre quotidien professionnel.</p>
+            <p class="text-xl text-gray-600">Découvrons ensemble comment la transition numérique redessine notre quotidien professionnel.</p>
             <p class="mt-8 text-gray-500">Utilisez les flèches pour naviguer.</p>
         </section>
 
-        <!-- Slide 2: Définition -->
+        <!-- Slide 2: Définir la dématérialisation -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-800 mb-6">Qu'est-ce que la <span class="text-teal-600">dématérialisation</span> ?</h2>
-            <p class="text-lg text-gray-700 mb-4">C'est simplement le fait de remplacer des documents ou des processus papier par leurs équivalents numériques.</p>
-            <div class="mt-6 p-4 bg-teal-50 rounded-lg border-l-4 border-teal-500">
-                <p class="font-semibold">Pensez-y comme transformer un bureau encombré de paperasse en un dossier bien organisé sur votre ordinateur. Tout devient plus facile à trouver, à partager et à stocker !</p>
+            <h2 class="text-3xl font-bold text-teal-800 mb-6">1. Définir la <span class="text-teal-600">Dématérialisation</span></h2>
+            <p class="text-lg text-gray-700 mb-4">C'est le remplacement de supports d'information matériels (souvent le papier) par des fichiers et processus numériques.</p>
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-300">
+                    <h3 class="font-bold text-gray-700">Niveau 1 : La copie numérique</h3>
+                    <p class="text-sm">On scanne un document existant. C'est utile, mais ce n'est qu'une "photo" du papier. L'information n'est pas facilement exploitable.</p>
+                    <p class="text-center mt-2 text-2xl">📄 ➡️ 📸</p>
+                </div>
+                <div class="bg-teal-50 p-4 rounded-lg border-l-4 border-teal-500">
+                    <h3 class="font-bold text-teal-800">Niveau 2 : Le processus "natif numérique"</h3>
+                    <p class="text-sm">On crée et on traite l'information directement sous forme numérique, sans jamais passer par le papier. C'est là que la magie opère !</p>
+                     <p class="text-center mt-2 text-2xl">⌨️ ➡️ ☁️</p>
+                </div>
+            </div>
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p class="font-semibold text-blue-800 text-center">Analogie : C'est comme la différence entre prendre en photo une lettre manuscrite et envoyer directement un e-mail.</p>
             </div>
         </section>
 
-        <!-- Slide 3: Activité Brainstorming -->
+        <!-- Slide 3: Avantages de la saisie en ligne -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-800 mb-2">Activité : Brainstorming</h2>
-            <p class="text-gray-600 mb-6">Selon vous, qu'est-ce que le numérique a déjà changé dans votre travail ?</p>
-            <div class="flex items-center mb-6">
-                <input type="text" id="brainstorm-input" class="flex-grow p-2 border rounded-l-md" placeholder="Ex: Envoyer des e-mails au lieu de courriers...">
-                <button onclick="addPostIt()" class="bg-teal-600 text-white px-4 py-2 rounded-r-md hover:bg-teal-700">Ajouter</button>
-            </div>
-            <div id="post-it-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 min-h-[150px] bg-gray-50 p-4 rounded-md">
-                <!-- Post-its will be added here -->
+            <h2 class="text-3xl font-bold text-teal-800 mb-6">2. Les 2 Avantages Clés de la <span class="text-teal-600">Saisie en Ligne</span></h2>
+            <p class="text-lg text-gray-600 mb-6">Quand on saisit une information une seule fois, directement dans le bon outil, on débloque d'énormes gains :</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                 <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center"><span class="text-3xl mr-3">⚡</span>Instantanéité & Fiabilité</h3>
+                    <p class="mt-2 text-gray-700">L'information est disponible <span class="font-semibold">immédiatement</span> pour tous les services concernés. Fini les doubles saisies et les erreurs de retranscription !</p>
+                    <p class="mt-3 text-sm italic p-3 bg-white rounded-md shadow-sm">Ex: Un commercial crée un nouveau client sur sa tablette. La compta et la logistique reçoivent l'info en temps réel, sans attendre un bon de commande papier.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center"><span class="text-3xl mr-3">🤖</span>Automatisation & Gain de Temps</h3>
+                    <p class="mt-2 text-gray-700">Une donnée saisie en ligne peut <span class="font-semibold">déclencher automatiquement</span> une cascade d'actions. Le système travaille pour vous.</p>
+                    <p class="mt-3 text-sm italic p-3 bg-white rounded-md shadow-sm">Ex: Un salarié pose un congé en ligne. La demande part au manager, puis met à jour le solde de congés et le planning de l'équipe, sans aucune intervention manuelle.</p>
+                </div>
             </div>
         </section>
-
-        <!-- Slide 4: Avantages -->
+        
+        <!-- Slide 4: Comprendre l'impact sur les processus -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-800 mb-6">Pourquoi est-ce si important ?</h2>
-            <p class="text-lg text-gray-600 mb-6">La saisie d'informations en ligne et la dématérialisation offrent des avantages concrets :</p>
-            <div class="grid md:grid-cols-2 gap-6 text-center">
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <span class="text-4xl">🚀</span>
-                    <h3 class="text-xl font-semibold mt-2">Gain d'efficacité</h3>
-                    <p>Automatisation des tâches et accès rapide à l'information.</p>
+            <h2 class="text-3xl font-bold text-teal-800 mb-6">3. L'Impact sur les <span class="text-teal-600">Processus de Travail</span></h2>
+            <p class="text-lg text-gray-600 mb-6">Le numérique ne fait pas qu'accélérer les anciennes méthodes. Il les <span class="font-semibold">transforme en profondeur</span>.</p>
+            <div class="flex flex-col md:flex-row items-center justify-around text-center">
+                <div class="w-full md:w-2/5 mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">Avant : Processus Linéaire</h3>
+                    <div class="text-sm font-semibold p-3 bg-red-100 rounded-lg">A ➡️ B ➡️ C</div>
+                    <p class="mt-2 text-sm text-gray-600">Chacun attend que le précédent ait fini sa tâche papier pour commencer la sienne. C'est lent et opaque.</p>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <span class="text-4xl">🤝</span>
-                    <h3 class="text-xl font-semibold mt-2">Meilleure collaboration</h3>
-                    <p>Partage facile des documents et travail simultané.</p>
-                </div>
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <span class="text-4xl">💾</span>
-                    <h3 class="text-xl font-semibold mt-2">Sécurité et archivage</h3>
-                    <p>Moins de risques de perte, stockage sécurisé et durable.</p>
-                </div>
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <span class="text-4xl">💰</span>
-                    <h3 class="text-xl font-semibold mt-2">Réduction des coûts</h3>
-                    <p>Économies sur le papier, l'impression et le stockage physique.</p>
+                <div class="text-4xl text-gray-400 mx-8">🔄</div>
+                 <div class="w-full md:w-2/5">
+                    <h3 class="text-xl font-bold mb-2">Après : Processus Collaboratif</h3>
+                    <div class="text-sm font-semibold p-3 bg-green-100 rounded-lg">A + B + C en simultané</div>
+                    <p class="mt-2 text-sm text-gray-600">Tout le monde accède à la même information en temps réel et peut travailler dessus en même temps.</p>
                 </div>
             </div>
+            <p class="mt-8 text-center text-lg font-semibold">On passe d'une course de relais à un travail d'équipe synchronisé !</p>
         </section>
 
         <!-- Slide 5: Activité Drag & Drop -->
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-2">Activité : Le traitement d'une note de frais</h2>
-            <p class="text-gray-600 mb-6">Faites glisser chaque étape dans la bonne colonne pour comparer les processus.</p>
+            <p class="text-gray-600 mb-6">Mettons en pratique ! Faites glisser chaque étape dans la bonne colonne pour visualiser la transformation du processus.</p>
             <div class="grid grid-cols-2 gap-4 mb-6">
                 <div id="drop-before" class="drop-zone border-2 border-red-300 bg-red-50 rounded-lg p-4 min-h-[200px]">
-                    <h3 class="font-bold text-red-800 text-center">Avant (Papier)</h3>
+                    <h3 class="font-bold text-red-800 text-center">Processus Linéaire (Papier)</h3>
                 </div>
                 <div id="drop-after" class="drop-zone border-2 border-green-300 bg-green-50 rounded-lg p-4 min-h-[200px]">
-                    <h3 class="font-bold text-green-800 text-center">Après (Numérique)</h3>
+                    <h3 class="font-bold text-green-800 text-center">Processus Collaboratif (Numérique)</h3>
                 </div>
             </div>
             <div id="drag-items" class="flex flex-wrap gap-2 justify-center">
@@ -115,10 +134,22 @@
             </div>
         </section>
         
-        <!-- Slide 6: Conclusion -->
-        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center">
+        <!-- Slide 6: Activité Brainstorming -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-teal-800 mb-2">Activité : Et vous, dans votre quotidien ?</h2>
+            <p class="text-gray-600 mb-6">Maintenant que nous avons vu les concepts, quels processus de votre travail pourraient être améliorés par le numérique ?</p>
+            <div class="flex items-center mb-6">
+                <input type="text" id="brainstorm-input" class="flex-grow p-2 border rounded-l-md" placeholder="Ex: La gestion des plannings, le suivi des commandes...">
+                <button onclick="addPostIt()" class="bg-teal-600 text-white px-4 py-2 rounded-r-md hover:bg-teal-700">Ajouter</button>
+            </div>
+            <div id="post-it-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 min-h-[150px] bg-gray-50 p-4 rounded-md">
+            </div>
+        </section>
+
+        <!-- Slide 7: Conclusion -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
             <h2 class="text-3xl font-bold text-teal-800 mb-6">Ce qu'il faut retenir</h2>
-            <p class="text-xl text-gray-700 mb-4">La transition numérique n'est pas qu'une question d'outils, c'est une nouvelle façon de travailler plus <span class="font-semibold text-teal-600">efficace</span>, plus <span class="font-semibold text-teal-600">collaborative</span> et plus <span class="font-semibold text-teal-600">sécurisée</span>.</p>
+            <p class="text-xl text-gray-700 mb-4">La transition numérique est une opportunité de <span class="font-semibold text-teal-600">repenser</span> nos manières de travailler pour les rendre plus <span class="font-semibold text-teal-600">simples</span>, plus <span class="font-semibold text-teal-600">rapides</span> et plus <span class="font-semibold text-teal-600">intelligentes</span>.</p>
             <p class="mt-8 text-2xl">Bravo pour ce premier module !</p>
         </section>
 
@@ -194,13 +225,13 @@
         let draggedItem = null;
 
         draggables.forEach(draggable => {
-            draggable.addEventListener('dragstart', () => {
-                draggedItem = draggable;
-                setTimeout(() => draggable.style.display = 'none', 0);
+            draggable.addEventListener('dragstart', (e) => {
+                draggedItem = e.target;
+                setTimeout(() => e.target.style.display = 'none', 0);
             });
-            draggable.addEventListener('dragend', () => {
+            draggable.addEventListener('dragend', (e) => {
                 setTimeout(() => {
-                    draggedItem.style.display = 'block';
+                    e.target.style.display = 'block';
                     draggedItem = null;
                 }, 0);
             });
@@ -238,3 +269,4 @@
 
 </body>
 </html>
+

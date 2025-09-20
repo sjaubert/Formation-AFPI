@@ -1,4 +1,4 @@
 # Formation-AFPI
 
-# Cours-IA
+## <b> TPFP TMI : Transition Numérique</b>
 [Art du Prompt](https://sjaubert.github.io/Formation-AFPI/plan-Transition_numerique.html?target=_blank)

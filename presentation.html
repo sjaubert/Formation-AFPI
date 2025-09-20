@@ -1,1 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Enjeux du Numérique & Cybersécurité</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Teal accents -->
+    <!-- Application Structure Plan: L'application est conçue avec une navigation par onglets (Accueil, Dématérialisation, Impacts & Défis, Futur & Pratiques, Cybersécurité) plutôt qu'un long défilement. Cette architecture permet à l'utilisateur d'accéder directement au sujet qui l'intéresse, rendant l'information plus digeste et structurée. Chaque section est traitée comme un module autonome pour une meilleure clarté. Cette approche non-linéaire est plus engageante pour l'apprentissage et la consultation qu'une simple liste, car elle encourage l'exploration active du contenu. -->
+    <!-- Visualization & Content Choices: 
+        - Introduction -> Goal: Inform -> Viz/Presentation: Cartes de statistiques animées -> Interaction: Impact visuel immédiat -> Justification: Capturer l'attention avec les chiffres clés.
+        - Définition vs Digitalisation -> Goal: Compare -> Viz/Presentation: Cartes interactives côte à côte -> Interaction: Clic pour révéler le contenu -> Justification: Mettre en évidence la distinction fondamentale.
+        - Avantages -> Goal: Quantify/Compare -> Viz/Presentation: Diagramme à barres (Chart.js) -> Interaction: Survol pour voir les détails -> Justification: Visualiser concrètement les gains économiques.
+        - Productivité -> Goal: Inform -> Viz/Presentation: Diagramme en anneau (Chart.js) -> Interaction: Survol -> Justification: Montrer la part de gain de manière simple et visuelle.
+        - Cybersécurité -> Goal: Educate/Organize -> Viz/Presentation: Cartes "flip" interactives -> Interaction: Clic pour retourner la carte et voir les conseils -> Justification: Méthode engageante et mémorable pour présenter les bonnes pratiques.
+        -> Library/Method: Chart.js (Canvas), HTML/CSS/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active {
+            border-bottom-color: #0d9488;
+            color: #0d9488;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .stat-card h3 {
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover h3 {
+            transform: scale(1.05);
+        }
+        .info-card {
+            perspective: 1000px;
+        }
+        .info-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .info-card.flipped .info-card-inner {
+            transform: rotateY(180deg);
+        }
+        .info-card-front, .info-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .info-card-back {
+            transform: rotateY(180deg);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-teal-700">La Transformation Numérique en Entreprise</h1>
+            <p class="text-lg text-gray-600 mt-2">Comprendre la dématérialisation, ses impacts et les enjeux de cybersécurité.</p>
+        </header>
+
+        <nav class="bg-white rounded-lg shadow-md mb-8 sticky top-2 z-10">
+            <ul class="flex flex-wrap justify-center items-center p-2 md:p-4 gap-2 md:gap-6">
+                <li><a href="#accueil" class="nav-link font-semibold text-gray-600 hover:text-teal-600 px-3 py-2">Accueil</a></li>
+                <li><a href="#dematerialisation" class="nav-link font-semibold text-gray-600 hover:text-teal-600 px-3 py-2">Dématérialisation</a></li>
+                <li><a href="#impacts" class="nav-link font-semibold text-gray-600 hover:text-teal-600 px-3 py-2">Impacts & Défis</a></li>
+                <li><a href="#futur" class="nav-link font-semibold text-gray-600 hover:text-teal-600 px-3 py-2">Futur & Pratiques</a></li>
+                <li><a href="#cybersecurite" class="nav-link font-semibold text-gray-600 hover:text-teal-600 px-3 py-2">Cybersécurité</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="accueil" class="content-section">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-teal-700 mb-4">Introduction aux enjeux du numérique</h2>
+                    <p class="text-gray-600 mb-6">La transition numérique n'est plus une option, mais une nécessité stratégique qui redéfinit les modèles économiques et la compétitivité. Si une large majorité d'entreprises a amorcé ce virage, l'adoption des technologies de pointe reste hétérogène. Par exemple, bien que le potentiel de l'Intelligence Artificielle soit immense, son intégration est encore à ses débuts dans de nombreuses structures. Cette section présente des chiffres clés pour illustrer l'ampleur de cette transformation, ses nuances et son importance économique croissante.</p>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                        <div class="stat-card bg-teal-50 p-6 rounded-lg border border-teal-200">
+                            <h3 class="text-5xl font-extrabold text-teal-600">89%</h3>
+                            <p class="text-gray-700 mt-2 font-medium">des entreprises de l'UE avaient un niveau d'intensité numérique au moins élémentaire en 2023.</p>
+                            <p class="text-xs text-gray-500 mt-1">(Source: Eurostat)</p>
+                        </div>
+                        <div class="stat-card bg-sky-50 p-6 rounded-lg border border-sky-200">
+                            <h3 class="text-5xl font-extrabold text-sky-600">$1 009,8 Md</h3>
+                            <p class="text-gray-700 mt-2 font-medium">C'est la taille du marché mondial de la transformation numérique attendue en 2025.</p>
+                             <p class="text-xs text-gray-500 mt-1">(Source: Statista)</p>
+                        </div>
+                        <div class="stat-card bg-indigo-50 p-6 rounded-lg border border-indigo-200 lg:col-span-1 md:col-span-2">
+                             <h3 class="text-5xl font-extrabold text-indigo-600">Seulement 10%</h3>
+                            <p class="text-gray-700 mt-2 font-medium">des entreprises françaises (+10 salariés) utilisaient l'IA en 2023, montrant une marge de progression.</p>
+                            <p class="text-xs text-gray-500 mt-1">(Source: Insee)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dematerialisation" class="content-section">
+                 <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-teal-700 mb-4">Qu'est-ce que la dématérialisation ?</h2>
+                     <p class="text-gray-600 mb-6">La dématérialisation est au cœur de la transformation digitale. Elle consiste à remplacer les supports d'information papier par des fichiers numériques. Cette section explore sa définition précise, la distinction cruciale avec la digitalisation, ses différentes formes, et les avantages concrets qu'elle apporte, notamment en termes d'efficacité et de coûts.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h3 class="font-bold text-lg text-gray-800 mb-2">Dématérialisation</h3>
+                            <p class="text-gray-600">C'est le processus de conversion des documents papier en un format numérique. L'objectif principal est de se débarrasser du papier. C'est avant tout un changement de support.</p>
+                            <p class="font-semibold text-teal-600 mt-3">Exemple : Scanner une facture papier pour l'archiver en PDF.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h3 class="font-bold text-lg text-gray-800 mb-2">Digitalisation</h3>
+                            <p class="text-gray-600">C'est une démarche plus profonde. Elle consiste à revoir et optimiser un processus métier complet en y intégrant les technologies numériques. C'est un changement de processus.</p>
+                             <p class="font-semibold text-sky-600 mt-3">Exemple : Mettre en place un portail où les fournisseurs soumettent leurs factures et où celles-ci sont automatiquement validées et payées.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-teal-700 mt-8 mb-4">Types de Dématérialisation</h3>
+                     <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-teal-50 p-6 rounded-lg border border-teal-200">
+                             <span class="text-3xl">📄 → 💻</span>
+                            <h4 class="font-bold text-lg mt-2">Dématérialisation Duplicative</h4>
+                            <p class="text-gray-700 mt-1">Conversion de documents papier déjà existants en format numérique (scan).</p>
+                        </div>
+                         <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                              <span class="text-3xl">💻 ✨</span>
+                            <h4 class="font-bold text-lg mt-2">Dématérialisation Native</h4>
+                            <p class="text-gray-700 mt-1">Création du document directement au format numérique, sans jamais passer par une version papier.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-teal-700 mt-8 mb-4">Avantages de la saisie en ligne</h3>
+                    <div class="chart-container h-96">
+                        <canvas id="advantagesChart"></canvas>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold text-teal-700 mb-4">Cadre Légal et Exemples Concrets</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-6 rounded-lg border">
+                                <h4 class="font-bold text-lg text-gray-800 mb-2">Quelle valeur légale ?</h4>
+                                <p class="text-gray-600 mb-3">Un document numérique peut avoir la même valeur probante qu'un original papier, à condition de respecter certaines normes.</p>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li><span class="font-semibold">Copie fiable (NF Z42-013) :</span> Assure que la version numérique est une reproduction fidèle et durable de l'original papier.</li>
+                                    <li><span class="font-semibold">Signature électronique (eIDAS) :</span> Le règlement européen garantit la validité juridique des signatures électroniques.</li>
+                                    <li><span class="font-semibold">Archivage à valeur probante :</span> Conserve l'intégrité et l'intelligibilité des documents sur le long terme.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-lg border">
+                                <h4 class="font-bold text-lg text-gray-800 mb-2">Processus concernés</h4>
+                                <p class="text-gray-600 mb-3">La dématérialisation s'applique à de nombreux flux documentaires de l'entreprise :</p>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li><span class="font-semibold">Factures Fournisseurs & Clients :</span> Automatisation de la saisie, validation et paiement.</li>
+                                    <li><span class="font-semibold">Dossiers RH :</span> Contrats de travail, bulletins de paie, gestion des congés.</li>
+                                    <li><span class="font-semibold">Processus de contractualisation :</span> Envoi, signature et archivage des contrats.</li>
+                                    <li><span class="font-semibold">Notes de frais :</span> Soumission et validation via une application mobile.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="impacts" class="content-section">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-teal-700 mb-4">Impacts sur les Processus et Défis</h2>
+                    <p class="text-gray-600 mb-6">L'intégration du numérique transforme radicalement les méthodes de travail. Elle permet une automatisation poussée et une collaboration renforcée, mais soulève également des défis techniques et humains. Cette section détaille comment le travail évolue et quels sont les principaux obstacles à surmonter pour une transition réussie.</p>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Comment le numérique transforme le travail</h3>
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gray-50 p-4 rounded-lg text-center">
+                            <div class="text-4xl mb-2">🤖</div>
+                            <h4 class="font-semibold text-lg">Automatisation</h4>
+                            <p class="text-sm text-gray-600">Workflows intelligents, traçabilité complète des actions, réduction des tâches répétitives.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-center">
+                            <div class="text-4xl mb-2">🤝</div>
+                            <h4 class="font-semibold text-lg">Collaboration Renforcée</h4>
+                            <p class="text-sm text-gray-600">Travail simultané sur des documents, circuits de validation distribués, partage d'information instantané.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-center">
+                            <div class="text-4xl mb-2">🌍</div>
+                            <h4 class="font-semibold text-lg">Nouveaux Modèles</h4>
+                            <p class="text-sm text-gray-600">Facilite le télétravail, les équipes virtuelles et les méthodes agiles.</p>
+                        </div>
+                    </div>
+
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Les Défis de la Transition</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold text-sky-700">Défis Techniques</h4>
+                                    <ul class="list-disc list-inside text-gray-600">
+                                        <li>Sécurité des données</li>
+                                        <li>Intégration avec les systèmes existants</li>
+                                        <li>Performance et fiabilité des outils</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-indigo-700">Défis Humains</h4>
+                                    <ul class="list-disc list-inside text-gray-600">
+                                        <li>Résistance au changement</li>
+                                        <li>Nécessité de formation et d'accompagnement</li>
+                                        <li>Adaptation des compétences</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-red-700">Obligations Légales (France)</h4>
+                                    <p class="text-gray-600">La facturation électronique deviendra obligatoire pour toutes les transactions B2B entre 2024 et 2026.</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="chart-container h-80">
+                            <canvas id="productivityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="futur" class="content-section">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-teal-700 mb-4">Perspectives d'Avenir et Bonnes Pratiques</h2>
+                    <p class="text-gray-600 mb-6">Le futur du travail sera encore plus façonné par les technologies émergentes. Anticiper ces tendances est essentiel. Cette section explore les évolutions à venir comme l'IA et la blockchain, avec des chiffres prévisionnels, et propose des recommandations pratiques pour mettre en œuvre une stratégie numérique efficace et pérenne.</p>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Tendances Technologiques à l'horizon 2025-2030</h3>
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-fuchsia-50 border border-fuchsia-200 p-4 rounded-lg">
+                            <h4 class="font-semibold text-lg text-fuchsia-800">Intelligence Artificielle (IA)</h4>
+                            <p class="text-sm text-gray-600 mb-2">Automatisation, analyse prédictive, assistants virtuels. L'IA devient un co-pilote stratégique.</p>
+                            <p class="text-sm font-bold text-fuchsia-900">Le marché mondial de l'IA devrait dépasser 1 800 milliards de dollars d'ici 2030.</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                            <h4 class="font-semibold text-lg text-blue-800">Cloud Computing</h4>
+                            <p class="text-sm text-gray-600 mb-2">Socle de la flexibilité, de la collaboration et de l'accès aux innovations (SaaS, IaaS, PaaS).</p>
+                             <p class="text-sm font-bold text-blue-900">Les dépenses mondiales en cloud public devraient atteindre 679 milliards de dollars en 2024.</p>
+                        </div>
+                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                            <h4 class="font-semibold text-lg text-green-800">Blockchain</h4>
+                            <p class="text-sm text-gray-600 mb-2">Potentiel de rupture pour la traçabilité, la sécurité des transactions et la certification.</p>
+                            <p class="text-sm font-bold text-green-900">Le marché de la blockchain pourrait atteindre 163 milliards de dollars d'ici 2027.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Recommandations pour une Mise en Œuvre Réussie</h3>
+                    <div class="bg-gray-50 p-6 rounded-lg border">
+                        <h4 class="font-semibold text-lg mb-3">Facteurs Clés de Succès</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-teal-500 font-bold text-xl mr-3">✔</span>
+                                <div>
+                                    <h5 class="font-medium">Adopter une approche progressive</h5>
+                                    <p class="text-sm text-gray-600">Commencer par un projet pilote sur un périmètre limité pour tester et ajuster.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-teal-500 font-bold text-xl mr-3">✔</span>
+                                <div>
+                                    <h5 class="font-medium">Impliquer les collaborateurs</h5>
+                                    <p class="text-sm text-gray-600">La réussite dépend de l'adhésion des utilisateurs. Communiquer, former et co-construire.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-teal-500 font-bold text-xl mr-3">✔</span>
+                                <div>
+                                    <h5 class="font-medium">Choisir les bons outils</h5>
+                                    <p class="text-sm text-gray-600">Sélectionner des solutions adaptées aux besoins réels, sécurisées et faciles à utiliser.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-teal-500 font-bold text-xl mr-3">✔</span>
+                                <div>
+                                    <h5 class="font-medium">Mesurer les résultats</h5>
+                                    <p class="text-sm text-gray-600">Définir des indicateurs de performance (KPIs) pour évaluer les gains et justifier l'investissement.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="cybersecurite" class="content-section">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-red-700 mb-4">Cybersécurité : Les Réflexes Essentiels</h2>
+                    <p class="text-gray-600 mb-8">La transformation numérique augmente la surface d'exposition aux cyberattaques. Chaque collaborateur est un maillon essentiel de la chaîne de sécurité. Cette section présente de manière interactive les bonnes pratiques fondamentales que tout salarié doit connaître et appliquer pour protéger les informations de l'entreprise. Cliquez sur chaque carte pour découvrir le conseil.</p>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="info-card h-64 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                            <div class="info-card-inner">
+                                <div class="info-card-front bg-sky-100 border border-sky-300">
+                                    <div class="text-5xl mb-2">🎣</div>
+                                    <h3 class="text-xl font-bold text-sky-800">Phishing (Hameçonnage)</h3>
+                                </div>
+                                <div class="info-card-back bg-sky-600 text-white">
+                                    <p class="text-sm">Ne cliquez jamais sur des liens suspects. Vérifiez l'expéditeur. En cas de doute, ne pas ouvrir et signaler à l'IT.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-card h-64 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                            <div class="info-card-inner">
+                                <div class="info-card-front bg-indigo-100 border border-indigo-300">
+                                    <div class="text-5xl mb-2">🔑</div>
+                                    <h3 class="text-xl font-bold text-indigo-800">Mots de Passe</h3>
+                                </div>
+                                <div class="info-card-back bg-indigo-600 text-white">
+                                    <p class="text-sm">Utilisez des mots de passe longs, uniques et complexes (majuscules, minuscules, chiffres, symboles). Activez la double authentification.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-card h-64 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                            <div class="info-card-inner">
+                                <div class="info-card-front bg-amber-100 border border-amber-300">
+                                    <div class="text-5xl mb-2">📶</div>
+                                    <h3 class="text-xl font-bold text-amber-800">Réseaux Wi-Fi</h3>
+                                </div>
+                                <div class="info-card-back bg-amber-600 text-white">
+                                    <p class="text-sm">Évitez les Wi-Fi publics non sécurisés pour les tâches professionnelles. Utilisez un VPN fourni par l'entreprise si possible.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-card h-64 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                            <div class="info-card-inner">
+                                <div class="info-card-front bg-rose-100 border border-rose-300">
+                                    <div class="text-5xl mb-2">🚨</div>
+                                    <h3 class="text-xl font-bold text-rose-800">Signalement</h3>
+                                </div>
+                                <div class="info-card-back bg-rose-600 text-white">
+                                    <p class="text-sm">Un comportement étrange de votre ordinateur ? Un e-mail douteux ? Signalez immédiatement tout incident de sécurité au service informatique.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+
+            function setActiveLink(hash) {
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            function showSection(hash) {
+                sections.forEach(section => {
+                    if ('#' + section.id === hash) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            }
+
+            function handleNavigation() {
+                let hash = window.location.hash || '#accueil';
+                setActiveLink(hash);
+                showSection(hash);
+                
+                if (hash === '#dematerialisation' && !window.advantagesChart) {
+                    createAdvantagesChart();
+                }
+                 if (hash === '#impacts' && !window.productivityChart) {
+                    createProductivityChart();
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let hash = this.getAttribute('href');
+                    history.pushState(null, null, hash);
+                    handleNavigation();
+                });
+            });
+
+            window.addEventListener('popstate', handleNavigation);
+
+            handleNavigation();
+
+            function createAdvantagesChart() {
+                const ctx = document.getElementById('advantagesChart').getContext('2d');
+                window.advantagesChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Réduction des coûts de traitement', 'Traitement immédiat', 'Accessibilité 24/7', 'Réduction des erreurs'],
+                        datasets: [{
+                            label: 'Impacts positifs',
+                            data: [60, 85, 100, 70],
+                            backgroundColor: [
+                                'rgba(13, 148, 136, 0.6)',
+                                'rgba(8, 145, 178, 0.6)',
+                                'rgba(79, 70, 229, 0.6)',
+                                'rgba(192, 132, 252, 0.6)'
+                            ],
+                            borderColor: [
+                                'rgba(13, 148, 136, 1)',
+                                'rgba(8, 145, 178, 1)',
+                                'rgba(79, 70, 229, 1)',
+                                'rgba(192, 132, 252, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.x !== null) {
+                                             if(context.label.includes('coûts')){
+                                                label += context.parsed.x + '%';
+                                             } else {
+                                                label += 'Indice ' + context.parsed.x;
+                                             }
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                             title: {
+                                display: true,
+                                text: 'Gains d\'efficacité et bénéfices économiques'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+             function createProductivityChart() {
+                const ctx = document.getElementById('productivityChart').getContext('2d');
+                window.productivityChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Gain de productivité', 'Productivité initiale'],
+                        datasets: [{
+                            data: [25, 100], 
+                            backgroundColor: [
+                                'rgba(13, 148, 136, 0.7)',
+                                'rgba(203, 213, 225, 0.7)',
+                            ],
+                             borderColor: [
+                                'rgba(13, 148, 136, 1)',
+                                'rgba(203, 213, 225, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Gain de productivité moyen de 20 à 30%'
+                            },
+                             tooltip: {
+                                enabled: true
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
+
 

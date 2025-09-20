@@ -18,37 +18,26 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .post-it {
-            background-color: #fffbe9;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .post-it:hover { transform: scale(1.05); }
-        .draggable { cursor: grab; }
-        .drop-zone { border-style: dashed; }
-        .drop-zone.drag-over { background-color: #e0f2f1; border-color: #14b8a6; }
+        .quiz-option { transition: background-color 0.2s; }
     </style>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
 
     <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
-            <div class="flex items-center">
-                <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-16 w-auto mr-6">
-                <div>
-                    <h1 class="text-2xl font-bold text-teal-700">Module 1 : Les Enjeux du Numérique</h1>
-                    <p class="text-sm text-gray-500">Dématérialisation, saisie en ligne et impacts</p>
-                </div>
+        <div class="container mx-auto px-6 py-3 flex items-center">
+            <img src="logo_uimm_placeholder.jpg" alt="Logo UIMM Pôle Formation" class="h-16 w-auto mr-6">
+            <div>
+                <h1 class="text-2xl font-bold text-teal-700">Module 1 : Les Enjeux du Numérique</h1>
+                <p class="text-sm text-gray-500">Dématérialisation, saisie en ligne et impacts</p>
             </div>
         </div>
     </header>
 
     <main id="slideshow-container" class="flex-grow container mx-auto p-4 md:p-8 flex flex-col items-center justify-center">
-        <!-- Contenu des slides du module 1 (inchangé) -->
+        <!-- Slides de contenu (1 à 5) -->
         <section class="slide active w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
-            <h2 class="text-4xl font-bold text-teal-800 mb-4">Bienvenue dans le Module 1</h2>
+             <h2 class="text-4xl font-bold text-teal-800 mb-4">Bienvenue dans le Module 1</h2>
             <p class="text-xl text-gray-600">Découvrons ensemble comment la transition numérique redessine notre quotidien professionnel.</p>
-            <p class="mt-8 text-gray-500">Utilisez les flèches pour naviguer.</p>
         </section>
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-6">1. Définir la <span class="text-teal-600">Dématérialisation</span></h2>
@@ -57,92 +46,65 @@
                 <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-300">
                     <h3 class="font-bold text-gray-700">Niveau 1 : La copie numérique</h3>
                     <p class="text-sm">On scanne un document existant. C'est utile, mais ce n'est qu'une "photo" du papier. L'information n'est pas facilement exploitable.</p>
-                    <p class="text-center mt-2 text-2xl">📄 ➡️ 📸</p>
                 </div>
                 <div class="bg-teal-50 p-4 rounded-lg border-l-4 border-teal-500">
                     <h3 class="font-bold text-teal-800">Niveau 2 : Le processus "natif numérique"</h3>
-                    <p class="text-sm">On crée et on traite l'information directement sous forme numérique, sans jamais passer par le papier. C'est là que la magie opère !</p>
-                     <p class="text-center mt-2 text-2xl">⌨️ ➡️ ☁️</p>
+                    <p class="text-sm">On crée et on traite l'information directement sous forme numérique, sans jamais passer par le papier.</p>
                 </div>
-            </div>
-            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                <p class="font-semibold text-blue-800 text-center">Analogie : C'est comme la différence entre prendre en photo une lettre manuscrite et envoyer directement un e-mail.</p>
             </div>
         </section>
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-800 mb-6">2. Les 2 Avantages Clés de la <span class="text-teal-600">Saisie en Ligne</span></h2>
-            <p class="text-lg text-gray-600 mb-6">Quand on saisit une information une seule fois, directement dans le bon outil, on débloque d'énormes gains :</p>
+            <h2 class="text-3xl font-bold text-teal-800 mb-6">2. Les Avantages Clés de la <span class="text-teal-600">Saisie en Ligne</span></h2>
             <div class="grid md:grid-cols-2 gap-6">
                  <div class="bg-gray-50 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold text-gray-800 flex items-center"><span class="text-3xl mr-3">⚡</span>Instantanéité & Fiabilité</h3>
-                    <p class="mt-2 text-gray-700">L'information est disponible <span class="font-semibold">immédiatement</span> pour tous les services concernés. Fini les doubles saisies et les erreurs de retranscription !</p>
-                    <p class="mt-3 text-sm italic p-3 bg-white rounded-md shadow-sm">Ex: Un commercial crée un nouveau client sur sa tablette. La compta et la logistique reçoivent l'info en temps réel, sans attendre un bon de commande papier.</p>
+                    <h3 class="text-xl font-bold text-gray-800">⚡ Instantanéité & Fiabilité</h3>
+                    <p class="mt-2 text-gray-700">L'information est disponible <span class="font-semibold">immédiatement</span> pour tous. Fini les doubles saisies et les erreurs de retranscription !</p>
                 </div>
                 <div class="bg-gray-50 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold text-gray-800 flex items-center"><span class="text-3xl mr-3">🤖</span>Automatisation & Gain de Temps</h3>
-                    <p class="mt-2 text-gray-700">Une donnée saisie en ligne peut <span class="font-semibold">déclencher automatiquement</span> une cascade d'actions. Le système travaille pour vous.</p>
-                    <p class="mt-3 text-sm italic p-3 bg-white rounded-md shadow-sm">Ex: Un salarié pose un congé en ligne. La demande part au manager, puis met à jour le solde de congés et le planning de l'équipe, sans aucune intervention manuelle.</p>
+                    <h3 class="text-xl font-bold text-gray-800">🤖 Automatisation & Gain de Temps</h3>
+                    <p class="mt-2 text-gray-700">Une donnée saisie en ligne peut <span class="font-semibold">déclencher automatiquement</span> une cascade d'actions.</p>
                 </div>
             </div>
         </section>
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-teal-800 mb-6">3. L'Impact sur les <span class="text-teal-600">Processus de Travail</span></h2>
-            <p class="text-lg text-gray-600 mb-6">Le numérique ne fait pas qu'accélérer les anciennes méthodes. Il les <span class="font-semibold">transforme en profondeur</span>.</p>
             <div class="flex flex-col md:flex-row items-center justify-around text-center">
                 <div class="w-full md:w-2/5 mb-6 md:mb-0">
                     <h3 class="text-xl font-bold mb-2">Avant : Processus Linéaire</h3>
                     <div class="text-sm font-semibold p-3 bg-red-100 rounded-lg">A ➡️ B ➡️ C</div>
-                    <p class="mt-2 text-sm text-gray-600">Chacun attend que le précédent ait fini sa tâche papier pour commencer la sienne. C'est lent et opaque.</p>
+                    <p class="mt-2 text-sm text-gray-600">Chacun attend que le précédent ait fini sa tâche papier.</p>
                 </div>
                 <div class="text-4xl text-gray-400 mx-8">🔄</div>
                  <div class="w-full md:w-2/5">
                     <h3 class="text-xl font-bold mb-2">Après : Processus Collaboratif</h3>
                     <div class="text-sm font-semibold p-3 bg-green-100 rounded-lg">A + B + C en simultané</div>
-                    <p class="mt-2 text-sm text-gray-600">Tout le monde accède à la même information en temps réel et peut travailler dessus en même temps.</p>
+                    <p class="mt-2 text-sm text-gray-600">Tout le monde accède à la même information en temps réel.</p>
                 </div>
-            </div>
-            <p class="mt-8 text-center text-lg font-semibold">On passe d'une course de relais à un travail d'équipe synchronisé !</p>
-        </section>
-        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-800 mb-2">Activité : Le traitement d'une note de frais</h2>
-            <p class="text-gray-600 mb-6">Mettons en pratique ! Faites glisser chaque étape dans la bonne colonne pour visualiser la transformation du processus.</p>
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div id="drop-before" class="drop-zone border-2 border-red-300 bg-red-50 rounded-lg p-4 min-h-[200px]">
-                    <h3 class="font-bold text-red-800 text-center">Processus Linéaire (Papier)</h3>
-                </div>
-                <div id="drop-after" class="drop-zone border-2 border-green-300 bg-green-50 rounded-lg p-4 min-h-[200px]">
-                    <h3 class="font-bold text-green-800 text-center">Processus Collaboratif (Numérique)</h3>
-                </div>
-            </div>
-            <div id="drag-items" class="flex flex-wrap gap-2 justify-center">
-                <div class="draggable bg-white p-2 border rounded-md shadow-sm" draggable="true" data-target="before">Imprimer le formulaire</div>
-                <div class="draggable bg-white p-2 border rounded-md shadow-sm" draggable="true" data-target="after">Prendre les reçus en photo</div>
-                <div class="draggable bg-white p-2 border rounded-md shadow-sm" draggable="true" data-target="before">Agrafer les reçus</div>
-                <div class="draggable bg-white p-2 border rounded-md shadow-sm" draggable="true" data-target="after">Validation en un clic</div>
-                <div class="draggable bg-white p-2 border rounded-md shadow-sm" draggable="true" data-target="before">Transmettre au service compta</div>
-                <div class="draggable bg-white p-2 border rounded-md shadow-sm" draggable="true" data-target="after">Remboursement automatique</div>
-            </div>
-        </section>
-        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-800 mb-2">Activité : Et vous, dans votre quotidien ?</h2>
-            <p class="text-gray-600 mb-6">Maintenant que nous avons vu les concepts, quels processus de votre travail pourraient être améliorés par le numérique ?</p>
-            <div class="flex items-center mb-6">
-                <input type="text" id="brainstorm-input" class="flex-grow p-2 border rounded-l-md" placeholder="Ex: La gestion des plannings, le suivi des commandes...">
-                <button onclick="addPostIt()" class="bg-teal-600 text-white px-4 py-2 rounded-r-md hover:bg-teal-700">Ajouter</button>
-            </div>
-            <div id="post-it-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 min-h-[150px] bg-gray-50 p-4 rounded-md">
             </div>
         </section>
         <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg text-center justify-center">
-            <h2 class="text-3xl font-bold text-teal-800 mb-6">Ce qu'il faut retenir</h2>
-            <p class="text-xl text-gray-700 mb-4">La transition numérique est une opportunité de <span class="font-semibold text-teal-600">repenser</span> nos manières de travailler pour les rendre plus <span class="font-semibold text-teal-600">simples</span>, plus <span class="font-semibold text-teal-600">rapides</span> et plus <span class="font-semibold text-teal-600">intelligentes</span>.</p>
-            <p class="mt-8 text-2xl">Bravo pour ce premier module !</p>
+             <h2 class="text-3xl font-bold text-teal-800 mb-6">Prêt à tester vos connaissances ?</h2>
+            <p class="text-xl text-gray-700">Le quiz qui suit vous permettra de valider votre compréhension des enjeux de la numérisation.</p>
+        </section>
+
+        <!-- Slide 6: QUIZ -->
+        <section class="slide w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+            <div id="quiz-container-m1">
+                <h2 class="text-2xl font-bold text-teal-800 mb-4 text-center">Quiz : Les Enjeux du Numérique</h2>
+                <div id="quiz-progress-m1" class="text-center text-sm text-gray-500 mb-4"></div>
+                <div id="quiz-question-container-m1" class="bg-gray-50 p-6 rounded-lg">
+                    <p id="quiz-question-text-m1" class="text-lg font-semibold mb-4"></p>
+                    <div id="quiz-options-m1" class="space-y-3"></div>
+                </div>
+                <div id="quiz-feedback-m1" class="mt-4 text-center font-semibold"></div>
+                <div id="quiz-navigation-m1" class="text-center mt-6"></div>
+            </div>
         </section>
     </main>
 
     <footer class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
-            <button id="prev-btn" class="bg-white text-teal-700 px-6 py-2 rounded-lg shadow hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">Précédent</button>
+            <button id="prev-btn" class="bg-white text-teal-700 px-6 py-2 rounded-lg shadow hover:bg-gray-50 disabled:opacity-50">Précédent</button>
             <div id="progress-indicator" class="text-sm text-gray-500"></div>
             <button id="next-btn" class="bg-teal-600 text-white px-6 py-2 rounded-lg shadow hover:bg-teal-700">Suivant</button>
         </div>
@@ -156,9 +118,7 @@
         const progressIndicator = document.getElementById('progress-indicator');
 
         function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
             currentSlide = index;
             updateControls();
         }
@@ -166,71 +126,105 @@
         function updateControls() {
             prevBtn.disabled = currentSlide === 0;
             if (currentSlide === slides.length - 1) {
-                nextBtn.textContent = 'Terminer';
+                nextBtn.textContent = 'Terminer le module';
             } else {
                 nextBtn.textContent = 'Suivant';
             }
-            progressIndicator.textContent = `Diapositive ${currentSlide + 1} sur ${slides.length}`;
+            progressIndicator.textContent = `Écran ${currentSlide + 1} sur ${slides.length}`;
         }
 
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                showSlide(currentSlide - 1);
-            }
-        });
-
+        prevBtn.addEventListener('click', () => { if (currentSlide > 0) showSlide(currentSlide - 1); });
         nextBtn.addEventListener('click', () => {
             if (currentSlide < slides.length - 1) {
-                showSlide(currentSlide + 1);
+                 showSlide(currentSlide + 1);
             } else {
-                // MODIFICATION : Redirection vers le plan
                 window.location.href = 'plan.html';
             }
         });
-
-        // ... le reste du JS pour les activités est inchangé ...
-        function addPostIt() {
-            const input = document.getElementById('brainstorm-input');
-            const board = document.getElementById('post-it-board');
-            if (input.value.trim() === '') return;
-            const postIt = document.createElement('div');
-            postIt.className = 'post-it p-2 text-sm break-words';
-            postIt.textContent = input.value;
-            board.appendChild(postIt);
-            input.value = '';
-        }
-        document.getElementById('brainstorm-input').addEventListener('keypress', function (e) { if (e.key === 'Enter') { addPostIt(); } });
-        const draggables = document.querySelectorAll('.draggable');
-        const dropZones = document.querySelectorAll('.drop-zone');
-        let draggedItem = null;
-        draggables.forEach(draggable => {
-            draggable.addEventListener('dragstart', (e) => {
-                draggedItem = e.target;
-                setTimeout(() => e.target.style.display = 'none', 0);
-            });
-            draggable.addEventListener('dragend', (e) => {
-                setTimeout(() => { e.target.style.display = 'block'; draggedItem = null; }, 0);
-            });
-        });
-        dropZones.forEach(zone => {
-            zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
-            zone.addEventListener('dragleave', () => { zone.classList.remove('drag-over'); });
-            zone.addEventListener('drop', e => {
-                e.preventDefault();
-                zone.classList.remove('drag-over');
-                if (draggedItem) {
-                    const targetType = zone.id.includes('before') ? 'before' : 'after';
-                    if (draggedItem.dataset.target === targetType) {
-                        zone.appendChild(draggedItem);
-                        draggedItem.classList.add('bg-green-100', 'border-green-400');
-                    } else {
-                         draggedItem.classList.add('bg-red-100', 'border-red-400');
-                         setTimeout(() => { draggedItem.classList.remove('bg-red-100', 'border-red-400');}, 1000);
-                    }
-                }
-            });
-        });
         showSlide(0);
+
+        const quizDataM1 = [
+            { question: "Quelle est la différence fondamentale entre 'numériser un document' et un processus 'natif numérique' ?", options: ["La vitesse de traitement", "Le support de stockage (disque dur vs cloud)", "Le premier est une copie, le second crée la donnée sous forme numérique dès l'origine", "Il n'y a pas de différence majeure"], answer: 2 },
+            { question: "Une entreprise remplace ses factures papier par des PDF scannés envoyés par email. De quel niveau de dématérialisation s'agit-il ?", options: ["Natif numérique", "Processus collaboratif", "Copie numérique simple", "Automatisation avancée"], answer: 2 },
+            { question: "Quel est le principal risque d'un processus basé sur la re-saisie manuelle d'informations ?", options: ["Le coût du papier", "La lenteur du courrier", "Les erreurs de retranscription", "La complexité du classement"], answer: 2 },
+            { question: "L'avantage principal de la saisie en ligne unique est que l'information devient...", options: ["Plus confidentielle", "Disponible instantanément et sans erreur pour tous les services concernés", "Plus facile à imprimer", "Stockée pour une durée plus longue"], answer: 1 },
+            { question: "Comment la numérisation transforme-t-elle un processus de 'course de relais' (linéaire) ?", options: ["En remplaçant les coureurs par des robots", "En le transformant en travail d'équipe synchronisé et simultané", "En allongeant la piste de course", "En supprimant le besoin de passer le relais"], answer: 1 },
+            { question: "Dans un processus 'natif numérique' de demande de congés, quelle action est déclenchée automatiquement ?", options: ["L'impression du formulaire pour le manager", "La mise à jour du solde de congés et du planning", "L'envoi d'un courrier au domicile du salarié", "La commande de fournitures de bureau"], answer: 1 },
+            { question: "Pourquoi un simple scan (PDF image) d'une facture fournisseur est-il moins efficace qu'un formulaire de saisie en ligne ?", options: ["Le fichier PDF est plus lourd", "Les données (montant, date, ...) ne sont pas directement exploitables par le système comptable", "Les couleurs peuvent être différentes de l'original", "Le scan peut être de mauvaise qualité"], answer: 1 },
+            { question: "Lequel de ces exemples représente le mieux un processus 'natif numérique' ?", options: ["Scanner un bon de commande signé et l'envoyer par email", "Remplir un formulaire en ligne qui met à jour la base de données clients en temps réel", "Prendre en photo un devis et le stocker sur un serveur", "Utiliser un tableur pour lister les factures reçues par courrier"], answer: 1 },
+            { question: "Quel est l'impact direct d'un processus collaboratif numérique sur la visibilité du travail ?", options: ["Il rend le travail plus secret", "Il n'a aucun impact sur la visibilité", "Il permet à plusieurs personnes de voir l'avancement en temps réel", "Il limite la visibilité au seul manager"], answer: 2 },
+            { question: "Le passage au numérique vise principalement à...", options: ["Supprimer tous les ordinateurs de l'entreprise", "Rendre les tâches plus complexes mais plus intéressantes", "Juste économiser du papier", "Fluidifier les processus, fiabiliser les données et accélérer le travail"], answer: 3 },
+        ];
+
+        let currentQuestionM1 = 0;
+        let scoreM1 = 0;
+        const questionTextElM1 = document.getElementById('quiz-question-text-m1');
+        const optionsElM1 = document.getElementById('quiz-options-m1');
+        const feedbackElM1 = document.getElementById('quiz-feedback-m1');
+        const progressElM1 = document.getElementById('quiz-progress-m1');
+        const navigationElM1 = document.getElementById('quiz-navigation-m1');
+
+        function loadQuizM1() {
+            if (currentQuestionM1 < quizDataM1.length) {
+                const q = quizDataM1[currentQuestionM1];
+                progressElM1.textContent = `Question ${currentQuestionM1 + 1} sur ${quizDataM1.length}`;
+                questionTextElM1.textContent = q.question;
+                optionsElM1.innerHTML = '';
+                feedbackElM1.innerHTML = '';
+                navigationElM1.innerHTML = '';
+
+                q.options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'w-full text-left p-3 bg-white border rounded-lg hover:bg-gray-100 quiz-option';
+                    button.onclick = () => selectAnswerM1(index, q.answer);
+                    optionsElM1.appendChild(button);
+                });
+            } else {
+                showFinalScoreM1();
+            }
+        }
+
+        function selectAnswerM1(selectedIndex, correctIndex) {
+            const buttons = optionsElM1.getElementsByTagName('button');
+            Array.from(buttons).forEach(btn => btn.disabled = true);
+
+            if (selectedIndex === correctIndex) {
+                buttons[selectedIndex].classList.add('bg-green-200', 'border-green-500');
+                feedbackElM1.textContent = 'Bonne réponse !';
+                feedbackElM1.className = 'mt-4 text-center font-semibold text-green-700';
+                scoreM1++;
+            } else {
+                buttons[selectedIndex].classList.add('bg-red-200', 'border-red-500');
+                buttons[correctIndex].classList.add('bg-green-200', 'border-green-500');
+                feedbackElM1.textContent = 'Réponse incorrecte.';
+                feedbackElM1.className = 'mt-4 text-center font-semibold text-red-700';
+            }
+
+            const nextQuestionBtn = document.createElement('button');
+            nextQuestionBtn.textContent = 'Question Suivante →';
+            nextQuestionBtn.className = 'bg-teal-600 text-white px-5 py-2 rounded-lg shadow hover:bg-teal-700';
+            nextQuestionBtn.onclick = () => {
+                currentQuestionM1++;
+                loadQuizM1();
+            };
+            navigationElM1.appendChild(nextQuestionBtn);
+        }
+
+        function showFinalScoreM1() {
+            document.getElementById('quiz-question-container-m1').style.display = 'none';
+            navigationElM1.innerHTML = '';
+            let message = `Votre score final : ${scoreM1} / ${quizDataM1.length}.`;
+            if(scoreM1 > 7) message += " Excellent travail !";
+            else if(scoreM1 > 4) message += " C'est un bon début !";
+            else message += " N'hésitez pas à revoir les concepts clés.";
+
+            feedbackElM1.textContent = message;
+            feedbackElM1.className = 'mt-4 text-center font-bold text-xl text-teal-800';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadQuizM1);
     </script>
 </body>
 </html>
+

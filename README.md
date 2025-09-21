@@ -8,4 +8,4 @@
 [Module 2](https://sjaubert.github.io/Formation-AFPI/module2.html?target=_blank)<br>
 [Mail Frauduleux](https://sjaubert.github.io/Formation-AFPI/mailfrauduleux.html?target=_blank)<br>
 
-
+[economic-research-chatgpt-usage-paper](https://sjaubert.github.io/Formation-AFPI/utilisation_ ChatGPT_Infographie.html?target=_blank)<br>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'utilisation de ChatGPT : Une Infographie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .stat-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .highlight-number {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        @media (min-width: 768px) {
+            .highlight-number {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#2c3e50] mb-4">Comment le Monde Utilise ChatGPT</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Une analyse approfondie des tendances d'utilisation de ChatGPT, révélant une croissance explosive, une domination de l'usage non professionnel et des applications variées allant de l'aide pratique à la création de contenu.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <section class="stat-card md:col-span-2">
+                <h2 class="text-2xl font-bold text-[#2c3e50] mb-2">Une Croissance Sans Précédent</h2>
+                <p class="text-gray-600 mb-4">Depuis son lancement, ChatGPT a connu une adoption fulgurante, atteignant environ 10% de la population adulte mondiale en juillet 2025.</p>
+                <div class="chart-container" style="height: 320px;">
+                    <canvas id="userGrowthChart"></canvas>
+                </div>
+            </section>
+            
+            <section class="stat-card flex flex-col justify-center text-center">
+                 <h2 class="text-2xl font-bold text-[#2c3e50] mb-2">Usage : Travail vs. Vie Personnelle</h2>
+                <p class="text-gray-600 mb-4">L'usage non professionnel a connu la croissance la plus rapide, représentant la grande majorité des conversations.</p>
+                <div class="chart-container h-64">
+                    <canvas id="usageSplitChart"></canvas>
+                </div>
+            </section>
+
+            <section class="stat-card md:col-span-3">
+                <h2 class="text-2xl font-bold text-[#2c3e50] text-center mb-4">De Quoi Parle-t-on ?</h2>
+                <p class="text-gray-600 mb-6 text-center max-w-2xl mx-auto">Près de 80% de toutes les conversations se concentrent sur trois grands thèmes, montrant que les utilisateurs recherchent avant tout une aide pratique et informationnelle.</p>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="topTopicsChart"></canvas>
+                </div>
+            </section>
+            
+            <section class="stat-card">
+                <h2 class="text-2xl font-bold text-[#2c3e50] mb-2">L'IA au Bureau</h2>
+                <p class="text-gray-600 mb-4">Dans un contexte professionnel, l'écriture est de loin le cas d'usage le plus fréquent, soulignant la capacité de l'IA à générer et modifier du contenu textuel.</p>
+                <div class="space-y-4 pt-4">
+                    <div class="text-center">
+                        <span class="text-6xl font-extrabold text-[#3498db]">40%</span>
+                        <p class="text-lg font-semibold text-gray-700">Écriture</p>
+                        <p class="text-sm text-gray-500">(E-mails, rapports, résumés...)</p>
+                    </div>
+                     <div class="text-center pt-4">
+                        <span class="text-4xl font-extrabold text-[#9b59b6]">24%</span>
+                        <p class="text-lg font-semibold text-gray-700">Conseils Pratiques</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stat-card text-center">
+                <h2 class="text-2xl font-bold text-[#2c3e50] mb-4">Demander vs. Faire</h2>
+                <p class="text-gray-600 mb-4">Les utilisateurs se servent de ChatGPT davantage pour obtenir des informations et des conseils ("Demander") que pour lui faire exécuter des tâches directement ("Faire").</p>
+                <div class="flex justify-around items-center h-full">
+                    <div>
+                        <div class="highlight-number text-[#1abc9c]">49%</div>
+                        <div class="text-xl font-bold">Demander</div>
+                        <p class="text-gray-500">Recherche d'infos, conseils</p>
+                    </div>
+                    <div>
+                        <div class="highlight-number text-[#e67e22]">40%</div>
+                        <div class="text-xl font-bold">Faire</div>
+                        <p class="text-gray-500">Exécution de tâches</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stat-card text-center flex flex-col justify-center">
+                 <h2 class="text-2xl font-bold text-[#2c3e50] mb-3">La Génération IA</h2>
+                 <div class="my-auto">
+                    <div class="highlight-number text-[#f1c40f]">46%</div>
+                    <p class="text-xl font-semibold text-gray-700">des messages proviennent des 18-25 ans.</p>
+                 </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-12 py-6 border-t border-gray-300">
+            <p class="text-gray-600">Source : Infographie basée sur l'étude "How People Use ChatGPT" par Hitzig, Z. et al., OpenAI, Septembre 2025.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const CHART_COLORS = {
+                blue: '#3498db',
+                purple: '#9b59b6',
+                green: '#1abc9c',
+                orange: '#e67e22',
+                dark_blue: '#2c3e50',
+                yellow: '#f1c40f',
+                red: '#e74c3c',
+                grey: '#bdc3c7',
+                text: '#374151',
+                grid: '#e5e7eb'
+            };
+
+            // --- User Growth Chart ---
+            const userGrowthCtx = document.getElementById('userGrowthChart');
+            if(userGrowthCtx) {
+                new Chart(userGrowthCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan 2023', 'Jul 2023', 'Jan 2024', 'Jul 2024', 'Jan 2025', 'Jul 2025'],
+                        datasets: [{
+                            label: 'Utilisateurs Actifs Hebdomadaires',
+                            data: [1, 80, 130, 240, 430, 700],
+                            borderColor: CHART_COLORS.blue,
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: CHART_COLORS.blue,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                             y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Utilisateurs (en millions)', color: CHART_COLORS.text },
+                                ticks: { color: CHART_COLORS.text },
+                                grid: { color: CHART_COLORS.grid }
+                            },
+                            x: {
+                                ticks: { color: CHART_COLORS.text },
+                                grid: { display: false }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+            }
+
+            // --- Usage Split Chart ---
+            const usageSplitCtx = document.getElementById('usageSplitChart');
+            if(usageSplitCtx) {
+                new Chart(usageSplitCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Usage non professionnel', 'Usage professionnel'],
+                        datasets: [{
+                            data: [73, 27],
+                            backgroundColor: [CHART_COLORS.green, CHART_COLORS.dark_blue],
+                            borderColor: '#f0f4f8',
+                            borderWidth: 4,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { color: CHART_COLORS.text, font: { size: 14 } }
+                            },
+                        }
+                    }
+                });
+            }
+
+            // --- Top Topics Chart ---
+            const topTopicsCtx = document.getElementById('topTopicsChart');
+            if (topTopicsCtx) {
+                new Chart(topTopicsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Conseils pratiques', 'Recherche d\'infos', 'Écriture', 'Multimédia', 'Expression', 'Aide technique'],
+                        datasets: [{
+                            label: 'Part des messages',
+                            data: [28.8, 24.4, 23.9, 7.3, 5.3, 5.1],
+                            backgroundColor: [
+                                CHART_COLORS.purple,
+                                CHART_COLORS.blue,
+                                CHART_COLORS.green,
+                                CHART_COLORS.orange,
+                                CHART_COLORS.yellow,
+                                CHART_COLORS.red,
+                            ],
+                            borderRadius: 4,
+                            maxBarThickness: 60,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: '% du total des messages', color: CHART_COLORS.text },
+                                ticks: { color: CHART_COLORS.text },
+                                grid: { color: CHART_COLORS.grid }
+                            },
+                            x: {
+                                ticks: { color: CHART_COLORS.text },
+                                grid: { display: false }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
